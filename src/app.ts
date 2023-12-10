@@ -1,7 +1,7 @@
 import { Application, Container, Ticker } from 'pixi.js'
 import { sceneConfig } from './config/SceneConfig'
-import { assetLoader } from './controllers/AssetLoader'
-import sceneController from './controllers/SceneController'
+import { assetLoader } from './system/controllers/AssetLoader'
+import { sceneController } from './system/controllers/SceneController'
 
 const clickToStart = document.getElementById('click-to-start') as HTMLElement
 

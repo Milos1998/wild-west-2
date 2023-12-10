@@ -1,4 +1,4 @@
-import { Orientation } from "../controllers/SceneController"
+import { Orientation } from "../system/controllers/SceneController"
 
 export const layoutConfig = [
     {

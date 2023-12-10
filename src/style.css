@@ -1,5 +1,6 @@
 html {
     user-select: none;
+    height: 100%;
 }
 
 * {
@@ -28,10 +29,6 @@ body {
     height: 100%;
     background-color: darkslategray;
     align-items: center;
-}
-
-#pixi-canvas {
-    display: block;
 }
 
 .flex-container {
