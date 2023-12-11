@@ -24,6 +24,7 @@ class AssetLoader {
         }
         await Assets.init({ manifest });
         await Assets.loadBundle("all", this.onProgressUpdate.bind(this));
+        // Assets.get(""); //koristi ovo za dohvatanje kesiranih tekstura
         //loading done
     }
 
