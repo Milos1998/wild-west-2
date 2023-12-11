@@ -1,6 +1,16 @@
-import { Orientation } from "../system/controllers/SceneController"
+export enum Orientation {
+    Landscape,
+    Portrait
+}
 
-export const layoutConfig = [
+export type ScreenSize = {
+    minWidth: number,
+    minHeight: number,
+    maxWidth: number,
+    maxHeight: number,
+};
+
+export const layoutConfig: { orientation: Orientation, config: ScreenSize }[] = [
     {
         orientation: Orientation.Landscape,
         config: {
@@ -19,9 +29,8 @@ export const layoutConfig = [
             maxHeight: 2000
         }
     } as const,
-] as const;
+];
 
 export const sceneConfig = {
-    backgroundColor: 0x000000,
     orientationRatio: 9/16,
 } as const;

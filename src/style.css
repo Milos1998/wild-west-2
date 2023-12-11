@@ -25,6 +25,10 @@ html {
     margin: 0;
 }
 
+#pixi-canvas {
+    display: none;
+}
+
 body {
     height: 100%;
     background-color: darkslategray;
