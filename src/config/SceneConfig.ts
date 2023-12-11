@@ -10,7 +10,7 @@ export type ScreenSize = {
     maxHeight: number,
 };
 
-export const layoutConfig: { orientation: Orientation, config: ScreenSize }[] = [
+export const screenConfig: { orientation: Orientation, config: ScreenSize }[] = [
     {
         orientation: Orientation.Landscape,
         config: {

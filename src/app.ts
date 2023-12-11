@@ -6,7 +6,8 @@ const clickToStart = document.getElementById('click-to-start') as HTMLElement
 const canvas = document.getElementById("pixi-canvas") as HTMLCanvasElement;
 clickToStart.onclick = () => {
     clickToStart.style.display = "none";
-    canvas.style.display = "block"
+    canvas.style.display = "block";
+    assetLoader.load();
 }
 
 const app = new Application({
@@ -17,5 +18,4 @@ const app = new Application({
 })
 
 sceneController.setupScene(app);
-assetLoader.load();
 

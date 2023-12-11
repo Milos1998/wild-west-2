@@ -1,5 +1,5 @@
-import { Application, Container, Graphics, Sprite, Texture, Ticker } from "pixi.js";
-import { layoutConfig, Orientation, sceneConfig, ScreenSize } from "../../config/SceneConfig";
+import { Application, Container, Ticker } from "pixi.js";
+import { screenConfig, Orientation, sceneConfig, ScreenSize } from "../../config/SceneConfig";
 
 /**
  * Resizes canvas, holds ticker
@@ -26,7 +26,7 @@ class SceneController {
 
     public fit() {
         const orientation = this.getOrientation(window.innerWidth, window.innerHeight);
-        const config = layoutConfig.find((layout) => layout.orientation === orientation)?.config;
+        const config = screenConfig.find((screen) => screen.orientation === orientation)?.config;
         if (config === undefined) throw new Error("Couldn't find layout config");
 
         this.resizeRenderer();
