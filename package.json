@@ -4,7 +4,7 @@
   "description": "slot.",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode=development --open",
+    "dev": "webpack-dev-server --mode=development",
     "build": "run-s clean build-only",
     "build-only": "webpack --mode=production",
     "prettier-format": "prettier ./src"

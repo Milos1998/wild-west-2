@@ -20,8 +20,10 @@ export abstract class LayoutNode {
     name: string = "";
     position: Position = { x: 0, y: 0 };
     scale: Scale = { x: 1, y: 1 };
-    alpha: number = 0;
+    alpha: number = 1;
     visible: boolean = true;
+    orientation: Orientation = Orientation.Landscape;
+    children: string[] = [];
 }
 
 export class ContainerNode extends LayoutNode {}
@@ -63,12 +65,22 @@ const landscapeConfigTree: LayoutConfigNode = {
                 {
                     name: "fsBackground",
                     type: "sprite",
-                    texture: "fsBackgroundLand",
+                    texture: "fsBackground",
                 },
                 {
                     name: "bgBackground",
                     type: "sprite",
-                    texture: "bgBackgroundLand",
+                    texture: "bgBackground",
+                    scale : { x: 1, y: 1 },
+                    children: [
+                        {
+                            name: "Q",
+                            type: "sprite",
+                            texture: "Q",
+                            position: { x: 1000, y: 600},
+                            anchor: { x: 0.5, y: 0.5 },
+                        },        
+                    ],
                 },
             ],
         }, {
@@ -80,37 +92,10 @@ const landscapeConfigTree: LayoutConfigNode = {
     ],
 }
 
-const portraitConfigTree: LayoutConfigNode = {
-    name: "game",
-    type: "container",
-    children: [
-        {
-            name: "backgroundContainer",
-            type: "container",
-            children: [
-                {
-                    name: "fsBackground",
-                    type: "sprite",
-                    texture: "fsBackgroundLand",
-                },
-                {
-                    name: "bgBackground",
-                    type: "sprite",
-                    texture: "bgBackgroundLand",
-                },
-            ],
-        }        
-    ],
-}
-
 export const layoutConfigTrees = [
     {
         orientation: Orientation.Landscape,
         tree: landscapeConfigTree,
-    },
-    {
-        orientation: Orientation.Portrait,
-        tree: portraitConfigTree,
     },
 ]
 
@@ -120,81 +105,21 @@ export const manifest = {
             name: "sprites",
             assets: [
                 {
-                    src: "",
-                    alias: "",
+                    src: "./assets/sprites/bonus spin background.jpg",
+                    alias: "fsBackground",
                 },
                 {
-                    src: "",
-                    alias: "",
+                    src: "./assets/sprites/background.jpg",
+                    alias: "bgBackground",
                 },
                 {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
+                    src: "./assets/sprites/Q.jpg",
+                    alias: "Q",
                 },
             ]
         }, {
             name: "sounds",
             assets: [
-                {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
-                },
-                {
-                    src: "",
-                    alias: "",
-                },
             ]
         }
     ]

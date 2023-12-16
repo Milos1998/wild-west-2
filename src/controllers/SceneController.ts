@@ -1,5 +1,5 @@
 import { Application, Container, Ticker } from "pixi.js";
-import { screenConfig, Orientation, sceneConfig, ScreenSize } from "../../config/SceneConfig";
+import { screenConfig, Orientation, sceneConfig, ScreenSize } from "../config/SceneConfig";
 
 /**
  * Resizes canvas, holds ticker
@@ -33,8 +33,11 @@ class SceneController {
 
         const aspectRatio = this.findAspectRatio(this.app.screen.width, this.app.screen.height, config);        
         this.scene.scale.set(aspectRatio);
-        this.scene.position.x = this.app.screen.width / 2;
-        this.scene.position.y = this.app.screen.height / 2;
+        // this.scene.position.x = (this.app.screen.width - config.maxWidth) / 2;
+        // this.scene.position.y = (this.app.screen.height - config.maxHeight) / 2;
+        this.app.stage.pivot.set(this.app.screen.width / 2, this.app.screen.height / 2);
+        const position = this.getNewStagePosition(config);
+        this.app.stage.position.set(position.x, position.y);
     }
 
     private resizeRenderer() {
@@ -60,6 +63,14 @@ class SceneController {
         if (screenHeight < config.minHeight) heightAR = screenHeight / config.minHeight;
         if (widthAR < heightAR) return widthAR;
         return heightAR;
+    }
+
+    private getNewStagePosition(config: ScreenSize): { x: number, y: number } {
+        let x = 1;
+        let y = 1;
+        this.app.screen.width / 2 + (this.app.screen.width - config.maxWidth) / 2, this.app.screen.height / 2
+
+        return { x, y };
     }
 
     private getOrientation(screenWidth: number, screenHeight: number) {

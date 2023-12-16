@@ -1,5 +1,5 @@
-import { Assets, Container, Graphics } from "pixi.js";
-import { manifest } from "../../config/LayoutConfig";
+import { Assets, Container, Graphics, Sprite } from "pixi.js";
+import { manifest } from "../config/LayoutConfig";
 import { sceneController } from "./SceneController";
 
 /**
