@@ -13,8 +13,7 @@ class AssetLoader {
         await Assets.init({ manifest });
         const sprites = Assets.loadBundle("sprites");
         const sounds = Assets.loadBundle("sounds");
-        Promise.all([sprites, sounds]);
-        //done loading assets
+        return Promise.all([sprites, sounds]);
     }
 
     private makeSplash(container: Container) {
@@ -23,6 +22,10 @@ class AssetLoader {
         this.splash.position.x = container.width / 2;
         this.splash.position.y = container.height / 2;
         //make some loading screen
+    }
+
+    public removeSplash() {
+        this.splash.parent.removeChild(this.splash);
     }
 }
 

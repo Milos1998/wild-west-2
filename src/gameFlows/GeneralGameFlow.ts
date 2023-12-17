@@ -41,4 +41,9 @@ export abstract class GeneralGameFlow {
      * Run when bad request has ben sent, request timeout or insuficient funds
      */
     * onBadRequest() {}
+
+    /**
+     * Run when state machine error occurs
+     */
+    * onError() {}
 }

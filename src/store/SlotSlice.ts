@@ -5,7 +5,6 @@ import { Orientation } from "../config/SceneConfig";
 const initialState: SlotStateType = {
     gameState: new GameState(),
     init: {
-        gameState: new GameState(),
         image: [],
         lines: [],
         paytable: [],
@@ -18,6 +17,7 @@ const initialState: SlotStateType = {
         initializationStep: "splash",
         orientation: Orientation.Landscape,
         orientationChangeStep: "finished",
+        isRequestSuccessful: true,
     }
 }
 
@@ -46,14 +46,17 @@ const slotSlice = createSlice({
         setFsWon: (state: SlotStateType, { payload: fsWon }: PayloadAction<number>) => {
             state.gameState.fsWon = fsWon;
         },
-        setLines: (state: SlotStateType, { payload: lines }: PayloadAction<number>) => {
-            state.gameState.lines = lines;
+        setLines: (state: SlotStateType, { payload: selectedLines }: PayloadAction<number>) => {
+            state.gameState.selectedLines = selectedLines;
         },
         setMaxBetPerLine: (state: SlotStateType, { payload: maxBetPerLine }: PayloadAction<number>) => {
             state.gameState.maxBetPerLine = maxBetPerLine;
         },
         setInit: (state: SlotStateType, { payload: init }: PayloadAction<Init>) => {
             state.init = init;
+        },
+        setGameState: (state: SlotStateType, { payload: newState }: PayloadAction<GameState>) => {
+            state.gameState = {... newState};
         },
         setSpinResponse: (state: SlotStateType, { payload: response }: PayloadAction<SpinResponse>) => {
             state.response = response;

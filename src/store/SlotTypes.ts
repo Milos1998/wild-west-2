@@ -11,6 +11,7 @@ type SystemState = {
     initializationStep: InitializationStepType,
     orientation: Orientation,
     orientationChangeStep: OrientationChangeStepType;
+    isRequestSuccessful: boolean;
 }
 
 export type InitializationStepType = "splash" | "asset loading" | "layout building" | "component init" | "finished";
@@ -24,7 +25,7 @@ export class GameState {
     nextFlow: string = "";
     betPerLine: number = 1;
     maxBetPerLine: number = 10;
-    lines: number = 0;
+    selectedLines: number = 0;
     fsWon: number = 0;
     fsLeft: number = 0;
 }
@@ -37,24 +38,23 @@ export type SpinResponse = {
 
 export type Init = {
     image: Image,
-    gameState: GameState,
     lines: Line[],
     paytable: PaytableItem[]
 }
 
-type PaytableItem = {
+export type PaytableItem = {
     symbol: Symbol,
     payoutPerMatch: number[],
 }
 
-type Line = {
+export type Line = {
     lineGroup: number,
     winPositions: number[];
 }
 
-type Image = Cell[][];
+export type Image = Cell[][];
 
-type Cell = {
+export type Cell = {
     position: {
         reel: number;
         cell: number;
