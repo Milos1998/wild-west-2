@@ -11,6 +11,8 @@ class SceneController {
 
     public scene!: Container;
 
+    private resizeTimer: NodeJS.Timeout | undefined;
+
     public setupScene(app: Application) {
         (globalThis as any).__PIXI_APP__ = app;
         this.app = app;
@@ -19,9 +21,17 @@ class SceneController {
         this.app.stage.addChild(this.scene);
 
         this.ticker = Ticker.shared;
-    
+
         this.fit();
-        window.addEventListener("resize", this.fit.bind(this));
+        window.addEventListener("resize", this.setResizeTimer.bind(this));
+    }
+
+    private setResizeTimer() {
+        if (this.resizeTimer !== undefined) clearTimeout(this.resizeTimer);
+        this.resizeTimer = setTimeout(() => {
+            this.fit();
+            this.resizeTimer = undefined;
+        }, 200);
     }
 
     public fit() {
@@ -33,11 +43,10 @@ class SceneController {
 
         const aspectRatio = this.findAspectRatio(this.app.screen.width, this.app.screen.height, config);        
         this.scene.scale.set(aspectRatio);
-        // this.scene.position.x = (this.app.screen.width - config.maxWidth) / 2;
-        // this.scene.position.y = (this.app.screen.height - config.maxHeight) / 2;
         this.app.stage.pivot.set(this.app.screen.width / 2, this.app.screen.height / 2);
-        const position = this.getNewStagePosition(config);
-        this.app.stage.position.set(position.x, position.y);
+        this.app.stage.position.set(this.app.screen.width / 2, this.app.screen.height / 2);
+        const position = this.getNewStagePosition(config, aspectRatio);
+        this.scene.position.set(position.x, position.y);
     }
 
     private resizeRenderer() {
@@ -65,17 +74,16 @@ class SceneController {
         return heightAR;
     }
 
-    private getNewStagePosition(config: ScreenSize): { x: number, y: number } {
-        let x = 1;
-        let y = 1;
-        this.app.screen.width / 2 + (this.app.screen.width - config.maxWidth) / 2, this.app.screen.height / 2
+    private getNewStagePosition(config: ScreenSize, scale: number): { x: number, y: number } {
+        let x = -(config.maxWidth * scale - this.app.screen.width) / 2;
+        let y = -(config.maxHeight * scale - this.app.screen.height) / 2;
 
         return { x, y };
     }
 
     private getOrientation(screenWidth: number, screenHeight: number) {
-        if (screenWidth / screenHeight > sceneConfig.orientationRatio) return Orientation.Landscape;
-        return Orientation.Portrait;
+        if (screenWidth / screenHeight < sceneConfig.orientationRatio) return Orientation.Portrait;
+        return Orientation.Landscape;
     }
 }
 
