@@ -3,7 +3,7 @@ import { GeneralGameFlow } from "./GeneralGameFlow";
 /**
  * Base game flow
  */
-export class FSGameFlow extends GeneralGameFlow {
+export class BGFlow extends GeneralGameFlow {
     /**
      * Run before removing splash screen, sets up game elements etc.
      */
