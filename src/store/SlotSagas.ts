@@ -1,17 +1,15 @@
-import { call, retry } from "redux-saga/effects"
+import { put, retry } from "redux-saga/effects"
 import { slotDataParser } from "./SlotDataParser";
 import { slotActions } from "./SlotSlice";
 
-export const initSlotStore = function*() {
-    //don't work, don't know why
-    // const data = yield retry(5, 2000, fetchInitialData);
-    const data = call(fetchInitialData);
+export const initSlotStore = function*(): Generator {
+    const data = yield retry(5, 2000, fetchInitialData);
     const initParsed = slotDataParser.parseInitData(data);
-    slotActions.setInit(initParsed.init);
-    slotActions.setGameState(initParsed.gameState);
+    yield put(slotActions.setInit(initParsed.init));
+    yield put(slotActions.setGameState(initParsed.gameState));
 }
 
-async function fetchInitialData(): Promise<any> {
+async function fetchInitialData() {
     const response = await fetch("http://localhost:8000/init", { method: "GET" });
     if (!response.ok) throw new Error(`Not able to fetch initial data, status code: ${response.status}`);
 

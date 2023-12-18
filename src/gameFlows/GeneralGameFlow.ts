@@ -45,5 +45,7 @@ export abstract class GeneralGameFlow {
     /**
      * Run when state machine error occurs
      */
-    * onError() {}
+    * onError() {
+        alert("Something went wrong :/");
+    }
 }

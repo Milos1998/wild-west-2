@@ -22,11 +22,10 @@ export const rootSaga = function* () {
 
     yield initComponents();
 
-    stateMachine.registerFlow("BaseGame", new BGFlow());
-    stateMachine.registerFlow("FreeSpin", new FSGameFlow());
+    stateMachine.registerFlow("baseGame", new BGFlow());
+    stateMachine.registerFlow("freeSpins", new FSGameFlow());
     stateMachine.addAsyncFlow(new SideEffectsFlow());
 
-    //start up state machine
     yield spawn([stateMachine, stateMachine.runGameFlow]);
 }
 

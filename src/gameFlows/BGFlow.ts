@@ -7,7 +7,8 @@ export class BGFlow extends GeneralGameFlow {
     /**
      * Run before removing splash screen, sets up game elements etc.
      */
-    * onBeforeDisplay() {}
+    * onBeforeDisplay() {
+    }
 
     /**
      * Run after pervious flow's onChangeFlow. Here you setup current flow elements and display bonus win
