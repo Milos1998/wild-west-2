@@ -1,6 +1,10 @@
+import { ReelSetComponent } from "./ReelSetComponent";
+
 /**
  * 
  */
-class ReelSetControlls {
-    //
+export class ReelSetControlls {
+    constructor(reelSet: ReelSetComponent) {
+        //
+    }
 }

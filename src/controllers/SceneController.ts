@@ -1,5 +1,8 @@
 import { Application, Container, Ticker } from "pixi.js";
 import { screenConfig, Orientation, sceneConfig, ScreenSize } from "../config/SceneConfig";
+import { put } from "redux-saga/effects";
+import { slotActions } from "../store/SlotSlice";
+import { sagaMiddleware, store } from "../store/Store";
 
 /**
  * Resizes canvas, holds ticker
@@ -47,6 +50,12 @@ class SceneController {
         this.app.stage.position.set(this.app.screen.width / 2, this.app.screen.height / 2);
         const position = this.getNewStagePosition(config, aspectRatio);
         this.scene.position.set(position.x, position.y);
+
+        if (store.getState().slotReducer.systemState.orientation !== orientation) {
+            sagaMiddleware.run(function* () {
+                yield put(slotActions.setOrientation(orientation));
+            });
+        }
     }
 
     private resizeRenderer() {

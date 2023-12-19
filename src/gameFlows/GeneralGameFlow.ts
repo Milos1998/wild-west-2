@@ -1,7 +1,11 @@
+import { GameControlls } from "../RootSagas";
+
 /**
  * Contains all states one game flow needs
  */
 export abstract class GeneralGameFlow {
+    constructor (flowControlls: GameControlls) {}
+
     /**
      * Run before removing splash screen, sets up game elements etc.
      */

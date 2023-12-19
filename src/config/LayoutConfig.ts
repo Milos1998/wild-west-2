@@ -63,24 +63,42 @@ const landscapeConfigTree: LayoutConfigNode = {
             type: "container",
             children: [
                 {
-                    name: "fsBackground",
+                    name: "baseBgLand",
                     type: "sprite",
-                    texture: "fsBackground",
+                    texture: "baseBgLand",
                 },
                 {
-                    name: "bgBackground",
+                    name: "bonusBgLand",
                     type: "sprite",
-                    texture: "bgBackground",
-                    scale : { x: 1, y: 1 },
-                    children: [
-                        {
-                            name: "Q",
-                            type: "sprite",
-                            texture: "Q",
-                            position: { x: 1000, y: 600},
-                            anchor: { x: 0.5, y: 0.5 },
-                        },        
-                    ],
+                    texture: "bonusBgLand",
+                },
+            ],
+        }, {
+            name: "reels",
+            type: "container",
+            children: [
+            ],
+        }
+    ],
+}
+
+const portraitConfigTree: LayoutConfigNode = {
+    name: "game",
+    type: "container",
+    children: [
+        {
+            name: "backgroundContainer",
+            type: "container",
+            children: [
+                {
+                    name: "baseBgLand",
+                    type: "sprite",
+                    texture: "baseBgPort",
+                },
+                {
+                    name: "bonusBgLand",
+                    type: "sprite",
+                    texture: "baseBgPort",
                 },
             ],
         }, {
@@ -97,6 +115,10 @@ export const layoutConfigTrees = [
         orientation: Orientation.Landscape,
         tree: landscapeConfigTree,
     },
+    {
+        orientation: Orientation.Portrait,
+        tree: portraitConfigTree,
+    },
 ]
 
 export const manifest = {
@@ -105,16 +127,20 @@ export const manifest = {
             name: "sprites",
             assets: [
                 {
-                    src: "./assets/sprites/bonus spin background.jpg",
-                    alias: "fsBackground",
+                    src: "./assets/sprites/baseBgLand.jpg",
+                    alias: "baseBgLand",
                 },
                 {
-                    src: "./assets/sprites/background.jpg",
-                    alias: "bgBackground",
+                    src: "./assets/sprites/bonusBgLand.jpg",
+                    alias: "bonusBgLand",
                 },
                 {
-                    src: "./assets/sprites/Q.jpg",
-                    alias: "Q",
+                    src: "./assets/sprites/bonusBgPort.jpg",
+                    alias: "bonusBgPort",
+                },
+                {
+                    src: "./assets/sprites/baseBgPort.jpg",
+                    alias: "baseBgPort",
                 },
             ]
         }, {

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { GameState, Init, InitializationStepType, OrientationChangeStepType, SlotStateType, SpinResponse } from "./SlotTypes";
+import { GameState, Init, SlotStateType, SpinResponse } from "./SlotTypes";
 import { Orientation } from "../config/SceneConfig";
 
 const initialState: SlotStateType = {
@@ -14,9 +14,7 @@ const initialState: SlotStateType = {
         highlight: [],
         reelImage: [],
     }, systemState: {
-        initializationStep: "splash",
         orientation: Orientation.Landscape,
-        orientationChangeStep: "finished",
         isRequestSuccessful: true,
     }
 }
@@ -61,14 +59,12 @@ const slotSlice = createSlice({
         setSpinResponse: (state: SlotStateType, { payload: response }: PayloadAction<SpinResponse>) => {
             state.response = response;
         },
-        setInitializationStep: (state: SlotStateType, { payload: initializationStep }: PayloadAction<InitializationStepType>) => {
-            state.systemState.initializationStep = initializationStep;
-        },
         setOrientation: (state: SlotStateType, { payload: orientation }: PayloadAction<Orientation>) => {
             state.systemState.orientation = orientation;
         },
-        setOrientationChangeStep: (state: SlotStateType, { payload: orientationChangeStep }: PayloadAction<OrientationChangeStepType>) => {
-            state.systemState.orientationChangeStep = orientationChangeStep;
+        setOrientationChanged: (state: SlotStateType) => {
+            //TODO pitaj dal ovo moze? Treba mi nesto sto druge komponente mogu da gledaju i da znaju da je zavrsena
+            //promena orijentacije kada je to pozvano?
         },
     }
 });

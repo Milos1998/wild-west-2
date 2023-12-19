@@ -1,4 +1,4 @@
-import { call, spawn } from "redux-saga/effects";
+import { call, put, spawn } from "redux-saga/effects";
 import { layoutConfigTrees } from "./config/LayoutConfig";
 import { assetLoader } from "./controllers/AssetLoader"
 import { sceneController } from "./controllers/SceneController";
@@ -8,8 +8,14 @@ import { FSGameFlow } from "./gameFlows/FSGameFlow";
 import { SideEffectsFlow } from "./gameFlows/SideEffectsFlow";
 import { stateMachine } from "./stateMachine/StateMachine";
 import { initSlotStore } from "./store/SlotSagas";
+import { ReelSetComponent } from "./components/reelSet/ReelSetComponent";
+import { ReelSetControlls } from "./components/reelSet/ReelSetControlls";
 
-export const rootSaga = function* () {
+export type GameControlls = {
+    reelSetControlls: ReelSetControlls,
+}
+
+export const rootSaga = function* (): Generator {
     yield call([assetLoader, assetLoader.load]);
 
     layoutController.fillLayoutMap(layoutConfigTrees);
@@ -20,15 +26,23 @@ export const rootSaga = function* () {
 
     yield initSlotStore();
 
-    yield initComponents();
+    const controlls = initComponents();
 
-    stateMachine.registerFlow("baseGame", new BGFlow());
-    stateMachine.registerFlow("freeSpins", new FSGameFlow());
+    stateMachine.registerFlow("baseGame", new BGFlow(controlls));
+    stateMachine.registerFlow("freeSpins", new FSGameFlow(controlls));
     stateMachine.addAsyncFlow(new SideEffectsFlow());
 
+    layoutController.orientationUpdate();
     yield spawn([stateMachine, stateMachine.runGameFlow]);
+    yield spawn([layoutController, layoutController.watchOrientationChange]);
 }
 
-function* initComponents() {
-    //
+function initComponents(): GameControlls {
+    const reelSet = new ReelSetComponent();
+    const reelSetControlls = new ReelSetControlls(reelSet);
+
+
+    return {
+        reelSetControlls,
+    }
 }

@@ -14,23 +14,23 @@ export const screenConfig: { orientation: Orientation, config: ScreenSize }[] = 
     {
         orientation: Orientation.Landscape,
         config: {
-           minWidth: 800,
-           minHeight: 600,
+           minWidth: 1000,
+           minHeight: 550,
            maxWidth: 2000,
-           maxHeight: 1200
+           maxHeight: 1400
        }
     } as const,
     {
         orientation: Orientation.Portrait,
         config: {
-            minWidth: 600,
-            minHeight: 800,
-            maxWidth: 1000,
+            minWidth: 630,
+            minHeight: 860,
+            maxWidth: 1400,
             maxHeight: 2000
         }
     } as const,
 ];
 
 export const sceneConfig = {
-    orientationRatio: 9/16,
+    orientationRatio: 4/5,
 } as const;

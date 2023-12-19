@@ -1,5 +1,3 @@
-class ReelSetComponent {
-    //
-}
+export class ReelSetComponent {
 
-export const reelSet = new ReelSetComponent();
+}

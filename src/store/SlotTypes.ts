@@ -8,15 +8,9 @@ export type SlotStateType = {
 }
 
 type SystemState = {
-    initializationStep: InitializationStepType,
     orientation: Orientation,
-    orientationChangeStep: OrientationChangeStepType;
     isRequestSuccessful: boolean;
 }
-
-export type InitializationStepType = "splash" | "asset loading" | "layout building" | "component init" | "finished";
-
-export type OrientationChangeStepType = "pre change" | "changing" | "finished";
 
 export class GameState {
     balance: number = 1000;
