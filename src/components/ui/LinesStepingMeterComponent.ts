@@ -1,6 +1,6 @@
 import { put, take } from "redux-saga/effects";
 import { slotActions } from "../../store/SlotSlice";
-import { sagaMiddleware, store } from "../../store/Store";
+import { sagaMiddleware, slotState } from "../../store/Store";
 import { BaseStepingMeterComponent } from "./baseComponents/BaseStepingMeterComponent";
 
 export class LinesStepingMeterComponent extends BaseStepingMeterComponent {
@@ -16,12 +16,12 @@ export class LinesStepingMeterComponent extends BaseStepingMeterComponent {
     }
 
     protected setValue(): void {
-        const { selectedLines } = store.getState().slotReducer.gameState;
+        const { selectedLines } = slotState().gameState;
         this.valueLabel.text = selectedLines.toString();
     }
 
     protected increment() {
-        const { selectedLines, maxSelectedLines } = store.getState().slotReducer.gameState;
+        const { selectedLines, maxSelectedLines } = slotState().gameState;
 
         this.decrementButton.enabled = selectedLines + 1 < maxSelectedLines;
         if (selectedLines + 1 > maxSelectedLines) return;
@@ -32,7 +32,7 @@ export class LinesStepingMeterComponent extends BaseStepingMeterComponent {
     }
 
     protected decrement() {
-        const { selectedLines } = store.getState().slotReducer.gameState;
+        const { selectedLines } = slotState().gameState;
 
         this.decrementButton.enabled = selectedLines - 1 > 1;
         if (selectedLines - 1 < 1) return;

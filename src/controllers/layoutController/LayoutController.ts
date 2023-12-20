@@ -2,7 +2,7 @@ import { Container, Sprite, Text } from "pixi.js";
 import { LayoutConfigNode, LayoutNode, SpriteNode, TextNode } from "../../config/LayoutConfig";
 import { Orientation } from "../../config/SceneConfig";
 import { LayoutItem } from "./LayoutMapNode";
-import { sagaMiddleware, store } from "../../store/Store";
+import { sagaMiddleware, slotState } from "../../store/Store";
 import { put, take } from "redux-saga/effects";
 import { slotActions } from "../../store/SlotSlice";
 
@@ -41,7 +41,7 @@ class LayoutController {
     }
 
     public orientationUpdate() {
-        const orientation: Orientation = store.getState().slotReducer.systemState.orientation;
+        const orientation: Orientation = slotState().systemState.orientation;
         this.layoutMap.forEach((layoutMapNode) => {
             const layoutNode = layoutMapNode.layoutNodes.find((node) => node.orientation === orientation);
 

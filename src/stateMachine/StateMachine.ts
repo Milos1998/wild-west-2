@@ -1,7 +1,7 @@
 import { call } from "redux-saga/effects";
 import { GeneralGameFlow } from "../gameFlows/GeneralGameFlow";
-import { store } from "../store/Store";
 import { assetLoader } from "../controllers/AssetLoader";
+import { slotState } from "../store/Store";
 
 type GameFlowState = "onBeforeDisplay" | "onBeforeRequest" | "onMakeRequest" | "onBadRequest" | "onSuccessfulResponse" | "onChangeFlow" | "onReturnToFlow" | "onDisplayAward";
 
@@ -29,7 +29,7 @@ class StateMachine {
             this.currentState = "onMakeRequest";
             return this.runningFlow.onMakeRequest;
         } else if (this.currentState === "onMakeRequest") {
-            const { isRequestSuccessful } = store.getState().slotReducer.systemState;
+            const { isRequestSuccessful } = slotState().systemState;
             if (isRequestSuccessful) {
                 this.currentState = "onSuccessfulResponse";
                 return this.runningFlow.onSuccessfulResponse;
@@ -37,7 +37,7 @@ class StateMachine {
             this.currentState = "onBadRequest";
             return this.runningFlow.onBadRequest;
         } else if (this.currentState === "onSuccessfulResponse") {
-            const { flow, nextFlow } = store.getState().slotReducer.gameState;
+            const { flow, nextFlow } = slotState().gameState;
             if (flow === nextFlow) {
                 this.currentState = "onDisplayAward";
                 return this.runningFlow.onDisplayAward;
@@ -60,14 +60,14 @@ class StateMachine {
     }
 
     private getCurrentFlow(): GeneralGameFlow {
-        const currentFlow = store.getState().slotReducer.gameState.flow;
+        const currentFlow = slotState().gameState.flow;
         const gameFlow = this.flows.get(currentFlow);
         if (gameFlow === undefined) throw new Error(`Game flow "${currentFlow}" is not registered`);
         return gameFlow;
     }
 
     private getNextFlow(): GeneralGameFlow {
-        const nextFlow = store.getState().slotReducer.gameState.nextFlow;
+        const nextFlow = slotState().gameState.nextFlow;
         const gameFlow = this.flows.get(nextFlow);
         if (gameFlow === undefined) throw new Error(`Game flow "${nextFlow}" is not registered`);
         return gameFlow;

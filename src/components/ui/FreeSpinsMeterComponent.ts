@@ -1,5 +1,5 @@
 import { take } from "redux-saga/effects";
-import { sagaMiddleware, store } from "../../store/Store";
+import { sagaMiddleware, slotState } from "../../store/Store";
 import { BaseMeterComponent } from "./baseComponents/BaseMeterComponent";
 import { slotActions } from "../../store/SlotSlice";
 
@@ -24,8 +24,8 @@ export class FreeSpinsMeterComponent extends BaseMeterComponent {
     }
 
     protected setValue(): void {
-        const { fsLeft } = store.getState().slotReducer.gameState;
-        const { fsWon } = store.getState().slotReducer.gameState;
+        const { fsLeft } = slotState().gameState;
+        const { fsWon } = slotState().gameState;
         this.valueLabel.text = `${fsWon - fsLeft} / ${fsWon}`;
     }
 }

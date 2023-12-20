@@ -1,6 +1,6 @@
 import { put, take } from "redux-saga/effects";
 import { slotActions } from "../../store/SlotSlice";
-import { sagaMiddleware, store } from "../../store/Store";
+import { sagaMiddleware, slotState } from "../../store/Store";
 import { BaseStepingMeterComponent } from "./baseComponents/BaseStepingMeterComponent";
 
 /**
@@ -19,12 +19,12 @@ export class BPLStepingMeterComponent extends BaseStepingMeterComponent {
     }
 
     protected setValue(): void {
-        const { betPerLine } = store.getState().slotReducer.gameState;
+        const { betPerLine } = slotState().gameState;
         this.valueLabel.text = betPerLine.toString();
     }
 
     protected increment() {
-        const { betPerLine, maxBetPerLine } = store.getState().slotReducer.gameState;
+        const { betPerLine, maxBetPerLine } = slotState().gameState;
 
         this.decrementButton.enabled = betPerLine + 1 < maxBetPerLine;
         if (betPerLine + 1 > maxBetPerLine) return;
@@ -35,7 +35,7 @@ export class BPLStepingMeterComponent extends BaseStepingMeterComponent {
     }
 
     protected decrement() {
-        const { betPerLine } = store.getState().slotReducer.gameState;
+        const { betPerLine } = slotState().gameState;
 
         this.decrementButton.enabled = betPerLine - 1 > 1;
         this.wasDecrementEnabled = this.decrementButton.enabled;

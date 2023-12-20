@@ -5,10 +5,12 @@ import { slotReducer } from "./SlotSlice";
 
 export const sagaMiddleware = createSagaMiddleware();
 
-export const store = configureStore({
+const store = configureStore({
     reducer: {
         slotReducer,
         reelSetReducer,        
     },
     middleware: [sagaMiddleware],
 });
+
+export const slotState = () => store.getState().slotReducer;

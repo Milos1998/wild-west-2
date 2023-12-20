@@ -1,5 +1,5 @@
 import { take } from "redux-saga/effects";
-import { sagaMiddleware, store } from "../../store/Store";
+import { sagaMiddleware, slotState } from "../../store/Store";
 import { BaseMeterComponent } from "./baseComponents/BaseMeterComponent";
 import { slotActions } from "../../store/SlotSlice";
 
@@ -24,8 +24,8 @@ export class BetMeterComponent extends BaseMeterComponent {
     }
 
     protected setValue(): void {
-        const { betPerLine } = store.getState().slotReducer.gameState;
-        const { selectedLines } = store.getState().slotReducer.gameState;
+        const { betPerLine } = slotState().gameState;
+        const { selectedLines } = slotState().gameState;
         this.valueLabel.text = (betPerLine * selectedLines).toString();
     }
 }
