@@ -1,5 +1,6 @@
 import { Container } from "pixi.js";
 import { layoutController } from "../controllers/layoutController/LayoutController";
+import { layoutUtils } from "../utils/LayoutUtils";
 
 /**
  * Template for all game components
@@ -10,9 +11,7 @@ export abstract class BaseComponent {
     protected name: string;
 
     constructor(layoutId: string) {
-        const layoutEntry = layoutController.layoutMap.get(layoutId);
-        if (layoutEntry === undefined) throw new Error(`Container with name ${layoutId} does not exist on any of the layouts`);
-        this.container = layoutEntry.container;
+        this.container = layoutUtils.getLayoutItem(layoutId).container;
         this.name = layoutId;
     }
 

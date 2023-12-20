@@ -62,3 +62,5 @@ type WinLine = {
     winCells: Cell[];
     payout: number;
 }
+
+export type Symbol = "wild" | "sherif" | "reward1000" | "diamonds" | "hearts" | "spades" | "clubs" | "A" | "K" | "Q" | "J" | "10" | "9";

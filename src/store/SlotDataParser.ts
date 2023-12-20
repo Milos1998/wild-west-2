@@ -1,4 +1,4 @@
-import { Cell, GameState, Image, Init, Line, PaytableItem } from "./SlotTypes";
+import { Cell, GameState, Image, Init, Line, PaytableItem, Symbol } from "./SlotTypes";
 
 class SlotDataParser {
     public parseInitData(data: any): { init: Init, gameState: GameState} {
@@ -45,13 +45,55 @@ class SlotDataParser {
         for (let i = 0; i < imageData.length; i++) {
             const reel: Cell[] = [];
             for (let j = 0; j < imageData[i].length; j++) {
-                reel.push(imageData[i][j]);
+                reel.push(this.makeCell(imageData[i][j]));
             }
             image.push(reel);
         }
-    
+
         return image;
-    }    
+    }
+
+    private makeCell(cellData: any): Cell {
+        const position = { reel: cellData.position.reel, cell: cellData.position.cell };
+        const symbol: Symbol = this.parseSymbol(cellData.symbol);
+        return {
+            position,
+            symbol,
+        }
+    }
+
+    private parseSymbol(symbolData: string): Symbol {
+        switch (symbolData) {
+            case "10":
+                return "10";
+            case "9":
+                return "9";
+            case "A":
+                return "A";
+            case "J":
+                return "J";
+            case "K":
+                return "K";
+            case "Q":
+                return "Q";
+            case "clubs":
+                return "clubs";
+            case "diamonds":
+                return "diamonds";
+            case "hearts":
+                return "hearts";
+            case "reward1000":
+                return "reward1000";
+            case "sherif":
+                return "sherif";
+            case "spades":
+                return "spades";
+            case "wild":
+                return "wild";
+            default:
+                throw new Error(`Symbol: ${symbolData} is not recognized`);
+        }
+    }
 }
 
 export const slotDataParser = new SlotDataParser();

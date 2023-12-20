@@ -12,6 +12,7 @@ import { ReelSetComponent } from "./components/reelSet/ReelSetComponent";
 import { ReelSetControlls } from "./components/reelSet/ReelSetControlls";
 import { UiComponent } from "./components/ui/UiComponent";
 import { UiControlls } from "./components/ui/UiControlls";
+import { layoutUtils } from "./utils/LayoutUtils";
 
 export type GameControlls = {
     reelSetControlls: ReelSetControlls,
@@ -24,9 +25,7 @@ export const rootSaga = function* (): Generator {
     layoutController.fillLayoutMap(layoutConfigTrees);
     layoutController.orientationUpdate();
 
-    const gameCont = layoutController.layoutMap.get("game");
-    if (gameCont === undefined) throw new Error("Game container is missing in layout trees");
-    sceneController.scene.addChild(gameCont.container);
+    sceneController.scene.addChild(layoutUtils.getLayoutItem("game").container);
 
     yield initSlotStore();
 
