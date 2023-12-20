@@ -10,9 +10,12 @@ import { stateMachine } from "./stateMachine/StateMachine";
 import { initSlotStore } from "./store/SlotSagas";
 import { ReelSetComponent } from "./components/reelSet/ReelSetComponent";
 import { ReelSetControlls } from "./components/reelSet/ReelSetControlls";
+import { UiComponent } from "./components/ui/UiComponent";
+import { UiControlls } from "./components/ui/UiControlls";
 
 export type GameControlls = {
     reelSetControlls: ReelSetControlls,
+    uiControlls: UiControlls,
 }
 
 export const rootSaga = function* (): Generator {
@@ -38,11 +41,14 @@ export const rootSaga = function* (): Generator {
 }
 
 function initComponents(): GameControlls {
-    const reelSet = new ReelSetComponent();
-    const reelSetControlls = new ReelSetControlls(reelSet);
+    const reelSet = new ReelSetComponent("reels");
+    const reelSetControlls = new ReelSetControlls();
 
+    const ui = new UiComponent("ui");
+    const uiControlls = new UiControlls(ui);
 
     return {
         reelSetControlls,
+        uiControlls,
     }
 }

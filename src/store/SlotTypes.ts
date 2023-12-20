@@ -20,6 +20,7 @@ export class GameState {
     betPerLine: number = 1;
     maxBetPerLine: number = 10;
     selectedLines: number = 0;
+    maxSelectedLines: number = 0;
     fsWon: number = 0;
     fsLeft: number = 0;
 }

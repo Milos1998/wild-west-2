@@ -1,13 +1,17 @@
+import { UiElementId } from "../components/ui/UiComponent";
 import { GeneralGameFlow } from "./GeneralGameFlow";
 
 /**
  * Base game flow
  */
 export class BGFlow extends GeneralGameFlow {
+    private baseGameUi: UiElementId[] = ["AUTO_SPIN", "BALANCE", "BET_PER_LINE", "LINES", "SKIP", "SLAM_STOP", "SPIN", "TOTAL_BET", "WIN"];
+
     /**
      * Run before removing splash screen, sets up game elements etc.
      */
     * onBeforeDisplay() {
+        yield this.flowControlls.uiControlls.toggleAllButtonsAndSteppers(true);
     }
 
     /**

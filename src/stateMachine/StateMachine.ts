@@ -1,6 +1,7 @@
 import { call } from "redux-saga/effects";
 import { GeneralGameFlow } from "../gameFlows/GeneralGameFlow";
 import { store } from "../store/Store";
+import { assetLoader } from "../controllers/AssetLoader";
 
 type GameFlowState = "onBeforeDisplay" | "onBeforeRequest" | "onMakeRequest" | "onBadRequest" | "onSuccessfulResponse" | "onChangeFlow" | "onReturnToFlow" | "onDisplayAward";
 
@@ -77,11 +78,11 @@ class StateMachine {
         let instruction = this.runningFlow.onBeforeDisplay;
         yield call(instruction)
 
-        //remove splash here
+        assetLoader.removeSplash();
 
         while (true) {
             instruction = this.getNextInstruction();
-            yield call(instruction)    
+            yield call([this.runningFlow, instruction]);    
         }
     }
 

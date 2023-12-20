@@ -44,7 +44,7 @@ const slotSlice = createSlice({
         setFsWon: (state: SlotStateType, { payload: fsWon }: PayloadAction<number>) => {
             state.gameState.fsWon = fsWon;
         },
-        setLines: (state: SlotStateType, { payload: selectedLines }: PayloadAction<number>) => {
+        setSelectedLines: (state: SlotStateType, { payload: selectedLines }: PayloadAction<number>) => {
             state.gameState.selectedLines = selectedLines;
         },
         setMaxBetPerLine: (state: SlotStateType, { payload: maxBetPerLine }: PayloadAction<number>) => {
@@ -52,9 +52,6 @@ const slotSlice = createSlice({
         },
         setInit: (state: SlotStateType, { payload: init }: PayloadAction<Init>) => {
             state.init = init;
-        },
-        setGameState: (state: SlotStateType, { payload: newState }: PayloadAction<GameState>) => {
-            state.gameState = {... newState};
         },
         setSpinResponse: (state: SlotStateType, { payload: response }: PayloadAction<SpinResponse>) => {
             state.response = response;
