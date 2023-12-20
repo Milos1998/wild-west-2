@@ -57,6 +57,7 @@ export class LayoutItem {
         if (layoutNode instanceof SpriteNode) {
             if (configNode.anchor) layoutNode.anchor = { ...configNode.anchor };
             if (configNode.texture) layoutNode.texture = Assets.get(configNode.texture);
+            else layoutNode.texture = Assets.get(configNode.name);
         }
         if (layoutNode instanceof TextNode) {
             if (configNode.anchor) layoutNode.anchor = { ...configNode.anchor };

@@ -76,7 +76,7 @@ class StateMachine {
     * runGameFlow() {
         this.runningFlow = this.getCurrentFlow();
         let instruction = this.runningFlow.onBeforeDisplay;
-        yield call(instruction)
+        yield call([this.runningFlow, instruction]);
 
         assetLoader.removeSplash();
 

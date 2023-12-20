@@ -37,9 +37,9 @@ export class BPLStepingMeterComponent extends BaseStepingMeterComponent {
     protected decrement() {
         const { betPerLine } = store.getState().slotReducer.gameState;
 
-        this.decrementButton.enabled = betPerLine - 1 > 0;
+        this.decrementButton.enabled = betPerLine - 1 > 1;
         this.wasDecrementEnabled = this.decrementButton.enabled;
-        if (betPerLine - 1 < 0) return;
+        if (betPerLine - 1 < 1) return;
 
         sagaMiddleware.run(function* () {
             yield put(slotActions.setSelectedLines(betPerLine - 1));

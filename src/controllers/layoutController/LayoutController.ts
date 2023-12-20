@@ -49,7 +49,7 @@ class LayoutController {
             else this.updateDisplayNode(layoutMapNode.container, layoutNode)
         });
         sagaMiddleware.run(function* () {
-            yield put(slotActions.setOrientationChanged);
+            yield put(slotActions.setOrientationChanged());
         });
     }
 

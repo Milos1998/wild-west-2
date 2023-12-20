@@ -23,7 +23,7 @@ export class LinesStepingMeterComponent extends BaseStepingMeterComponent {
     protected increment() {
         const { selectedLines, maxSelectedLines } = store.getState().slotReducer.gameState;
 
-        this.decrementButton.setEnabled(selectedLines + 1 < maxSelectedLines);
+        this.decrementButton.enabled = selectedLines + 1 < maxSelectedLines;
         if (selectedLines + 1 > maxSelectedLines) return;
 
         sagaMiddleware.run(function* () {
@@ -34,8 +34,8 @@ export class LinesStepingMeterComponent extends BaseStepingMeterComponent {
     protected decrement() {
         const { selectedLines } = store.getState().slotReducer.gameState;
 
-        this.decrementButton.setEnabled(selectedLines - 1 > 0);
-        if (selectedLines - 1 < 0) return;
+        this.decrementButton.enabled = selectedLines - 1 > 1;
+        if (selectedLines - 1 < 1) return;
 
         sagaMiddleware.run(function* () {
             yield put(slotActions.setSelectedLines(selectedLines - 1));

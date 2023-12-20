@@ -84,4 +84,8 @@ export class UiComponent extends BaseComponent {
             if (element) element.visible = true;
         });
     }
+
+    public displayUi(display: boolean) {
+        this.container.visible = display;
+    }
 }

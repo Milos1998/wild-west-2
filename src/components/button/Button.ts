@@ -15,7 +15,7 @@ export class Button extends BaseComponent {
     constructor(layoutId: string) {
         super(layoutId);
 
-        this.container.interactive = false;
+        this.container.eventMode = "none";
 
         this.spriteEnabled = this.container.getChildByName(`${this.name}_enabled`) as Sprite;
         this.spriteOver = this.container.getChildByName(`${this.name}_over`) as Sprite;
@@ -46,7 +46,7 @@ export class Button extends BaseComponent {
 
     public set enabled(enabled: boolean) {
         this._enabled = enabled;
-        this.container.interactive = enabled;
+        this.container.eventMode = enabled ? "static" : "none";
         this.setActiveSprite(this.spriteDisabled);
     }
 

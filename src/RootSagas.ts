@@ -22,6 +22,7 @@ export const rootSaga = function* (): Generator {
     yield call([assetLoader, assetLoader.load]);
 
     layoutController.fillLayoutMap(layoutConfigTrees);
+    layoutController.orientationUpdate();
 
     const gameCont = layoutController.layoutMap.get("game");
     if (gameCont === undefined) throw new Error("Game container is missing in layout trees");
@@ -35,7 +36,6 @@ export const rootSaga = function* (): Generator {
     stateMachine.registerFlow("freeSpins", new FSGameFlow(controlls));
     stateMachine.addAsyncFlow(new SideEffectsFlow());
 
-    layoutController.orientationUpdate();
     yield spawn([stateMachine, stateMachine.runGameFlow]);
     yield spawn([layoutController, layoutController.watchOrientationChange]);
 }

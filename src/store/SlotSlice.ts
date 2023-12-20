@@ -50,6 +50,9 @@ const slotSlice = createSlice({
         setMaxBetPerLine: (state: SlotStateType, { payload: maxBetPerLine }: PayloadAction<number>) => {
             state.gameState.maxBetPerLine = maxBetPerLine;
         },
+        setMaxSelectedLines: (state: SlotStateType, { payload: maxSelectedLines }: PayloadAction<number>) => {
+            state.gameState.maxSelectedLines = maxSelectedLines;
+        },
         setInit: (state: SlotStateType, { payload: init }: PayloadAction<Init>) => {
             state.init = init;
         },
