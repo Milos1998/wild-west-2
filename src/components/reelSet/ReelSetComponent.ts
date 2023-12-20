@@ -2,6 +2,7 @@ import { Cell } from "../../store/SlotTypes";
 import { slotState } from "../../store/Store";
 import { BaseComponent } from "../BaseComponent";
 import { ReelComponent } from "./reel/ReelComponent";
+import { symbolSetComponent } from "./symbolSet/SymbolSetComponent";
 
 /**
  * Reel set component
@@ -11,6 +12,8 @@ export class ReelSetComponent extends BaseComponent {
 
     constructor(layoutId: string) {
         super(layoutId);
+
+        symbolSetComponent.initSymbolPools();
 
         const init = slotState().init.image;
 

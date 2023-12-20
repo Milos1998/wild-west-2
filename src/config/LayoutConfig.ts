@@ -78,7 +78,39 @@ const landscapeConfigTree: LayoutConfigNode = {
         }, {
             name: "reels",
             type: "container",
+            position: { x: 700, y: 500 },
+            scale: { x: 1, y: 1 },
             children: [
+                {
+                    name: "reel0",
+                    type: "sprite",
+                    texture: "reelBg",
+                    position: { x: 0, y: 0 },
+                },
+                {
+                    name: "reel1",
+                    type: "sprite",
+                    texture: "reelBg",
+                    position: { x: 117, y: 0 },
+                },
+                {
+                    name: "reel2",
+                    type: "sprite",
+                    texture: "reelBg",
+                    position: { x: 234, y: 0 },
+                },
+                {
+                    name: "reel3",
+                    type: "sprite",
+                    texture: "reelBg",
+                    position: { x: 351, y: 0 },
+                },
+                {
+                    name: "reel4",
+                    type: "sprite",
+                    texture: "reelBg",
+                    position: { x: 468, y: 0 },
+                },
             ],
         }, {
             name: "ui",
@@ -531,6 +563,66 @@ export const manifest = {
                 {
                     src: "./assets/sprites/minusButton_disabled.png",
                     alias: "decrement_disabled",
+                },
+                {
+                    src: "./assets/sprites/reelBg.png",
+                    alias: "reelBg",
+                },
+                {
+                    src: "./assets/sprites/reelCellModel.png",
+                    alias: "reelCellModel",
+                },
+                {
+                    src: "./assets/sprites/9.jpg",
+                    alias: "9",
+                },
+                {
+                    src: "./assets/sprites/10.jpg",
+                    alias: "10",
+                },
+                {
+                    src: "./assets/sprites/A.jpg",
+                    alias: "A",
+                },
+                {
+                    src: "./assets/sprites/J.jpg",
+                    alias: "J",
+                },
+                {
+                    src: "./assets/sprites/K.jpg",
+                    alias: "K",
+                },
+                {
+                    src: "./assets/sprites/clubs.jpg",
+                    alias: "clubs",
+                },
+                {
+                    src: "./assets/sprites/hearts.jpg",
+                    alias: "hearts",
+                },
+                {
+                    src: "./assets/sprites/diamonds.jpg",
+                    alias: "diamonds",
+                },
+                {
+                    src: "./assets/sprites/spades.jpg",
+                    alias: "spades",
+                },
+                {
+                    src: "./assets/sprites/Q.jpg",
+                    alias: "Q",
+                },
+                {
+                    src: "./assets/sprites/sherif.png",
+                    alias: "sherif",
+                },
+                {
+                    src: "./assets/sprites/wild.png",
+                    alias: "wild",
+                },
+                {
+                    src: "./assets/sprites/reward1000.png",
+                    alias: "reward1000",
                 },
             ]
         }, {

@@ -10,15 +10,15 @@ export type PixiObjectsPoolEntry = {
 export class PixiObjectsPool {
     private pooledObjects: Map<string, PixiObjectsPoolEntry>;
 
-    private originalsLayoutId: string;
+    private assetName: string;
 
-    constructor(layoutId: string, initialSize?: number) {
-        this.originalsLayoutId = layoutId;
+    constructor(assetName: string, initialSize?: number) {
+        this.assetName = assetName;
         this.pooledObjects = new Map();
 
         const _initialSize = initialSize ? initialSize : 5;
         for (let i = 0; i < _initialSize; i++) {
-            const newObject = this.makePoolObject(`${this.originalsLayoutId}_${this.pooledObjects.size}`);
+            const newObject = this.makePoolObject(`${this.assetName}_${this.pooledObjects.size}`);
             this.pooledObjects.set(newObject.id, newObject);
         }
     }
@@ -31,14 +31,14 @@ export class PixiObjectsPool {
             }
         }
 
-        const newObject = this.makePoolObject(`${this.originalsLayoutId}_${this.pooledObjects.size}`);
+        const newObject = this.makePoolObject(`${this.assetName}_${this.pooledObjects.size}`);
         this.pooledObjects.set(newObject.id, newObject);
         newObject.isUsed = true;
         return newObject;
     }
 
     private makePoolObject(id: string): PixiObjectsPoolEntry {
-        const object = layoutUtils.copyPixiObject(this.originalsLayoutId);
+        const object = layoutUtils.makeSprite(this.assetName);
         object.name = id;
         return {
             id,

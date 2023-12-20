@@ -11,9 +11,12 @@ class SymbolSetComponent {
     constructor() {
         this.pool = new Map();
 
+    }
+
+    public initSymbolPools() {
         this.allSymbols.forEach((symbol) => {
             this.pool.set(symbol, new PixiObjectsPool(symbol));
-            this.pool.set(symbol + this.blurPrefix, new PixiObjectsPool(symbol + this.blurPrefix));
+            // this.pool.set(symbol + this.blurPrefix, new PixiObjectsPool(symbol + this.blurPrefix));
         });
     }
 

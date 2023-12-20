@@ -15,11 +15,20 @@ export class ReelComponent extends BaseComponent {
         super(layoutId);
 
         this.cells = [...cells];
-        //TODO update to work with multiple masks or pull mask from layout
-        this.container.mask = layoutUtils.makeSprite(layoutId);
+        this.setMask();
+        this.initReel();
+    }
 
+    private setMask() {
+        const mask = layoutUtils.makeSprite("reelBg");
+        this.container.addChild(mask);
+        this.container.mask = mask;
+    }
+
+    private initReel() {
         for(let i = 0; i < this.cells.length; i++) {
             const reelCell = this.makeReelCell(this.cells[i].position.cell);
+            this.container.addChild(reelCell.container);
             reelCell.setSymbol(this.cells[i].symbol);
         }
     }
