@@ -1,3 +1,5 @@
+import { put } from "redux-saga/effects";
+import { sagaMiddleware } from "../../store/Store";
 import { BaseComponent } from "../BaseComponent";
 import { Button } from "../button/Button";
 import { BPLStepingMeterComponent } from "./BPLStepingMeterComponent";
@@ -7,6 +9,7 @@ import { FreeSpinsMeterComponent } from "./FreeSpinsMeterComponent";
 import { LinesStepingMeterComponent } from "./LinesStepingMeterComponent";
 import { WinMeterComponent } from "./WinMeterComponent";
 import { BaseStepingMeterComponent } from "./baseComponents/BaseStepingMeterComponent";
+import { slotActions } from "../../store/SlotSlice";
 
 export type UiSpinButtonId =  "SPIN" | "SKIP" | "SLAM_STOP";
 
@@ -55,14 +58,16 @@ export class UiComponent extends BaseComponent {
         this.allElements.set("TOTAL_BET", totalBetMeter);
         const freeSpinsMeter = new FreeSpinsMeterComponent("freeSpinsMeter");
         this.allElements.set("FREE_SPINS", freeSpinsMeter);
+
+        this.setSpinButtonsActions();
     }
 
     public toggleAllButtonsAndSteppers(enabled: boolean) {
         this.allButtons.forEach((button) => {
-            button.enabled = enabled;
+            button.enabled = enabled && button.visible;
         });
         this.allSteppers.forEach((stepper) => {
-            stepper.setEnabled(enabled);
+            stepper.setEnabled(enabled && stepper.visible);
         });
     }
 
@@ -79,13 +84,44 @@ export class UiComponent extends BaseComponent {
     }
 
     public displayElements(elementIds: UiElementId[]) {
-        elementIds.forEach((id) => {
-            const element = this.allElements.get(id);
-            if (element) element.visible = true;
+        this.allElements.forEach((uiElement, elementId) => {
+            uiElement.visible = elementIds.includes(elementId);
         });
     }
 
     public displayUi(display: boolean) {
         this.container.visible = display;
+    }
+
+    private setSpinButtonsActions() {
+        const spinButton = this.allButtons.get("SPIN");
+        if (spinButton) {
+            spinButton.setOnAction(() => {
+                sagaMiddleware.run(function* () {
+                    yield put(slotActions.setIsSpinPressed(true));
+                    spinButton.enabled = false;
+                });
+            })
+        }
+
+        const slamStopButton = this.allButtons.get("SLAM_STOP");
+        if (slamStopButton) {
+            slamStopButton.setOnAction(() => {
+                sagaMiddleware.run(function* () {
+                    yield put(slotActions.setIsSlamStopped(true));
+                    slamStopButton.enabled = false;
+                });
+            })
+        }
+
+        const skipButton = this.allButtons.get("SKIP");
+        if (skipButton) {
+            skipButton.setOnAction(() => {
+                sagaMiddleware.run(function* () {
+                    yield put(slotActions.setIsSkipped(true));
+                    skipButton.enabled = false;
+                });
+            })
+        }
     }
 }

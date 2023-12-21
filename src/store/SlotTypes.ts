@@ -10,6 +10,9 @@ export type SlotStateType = {
 type SystemState = {
     orientation: Orientation,
     isRequestSuccessful: boolean;
+    isSlamStopped: boolean;
+    isSpinPressed: boolean;
+    isSkipped: boolean;
 }
 
 export class GameState {

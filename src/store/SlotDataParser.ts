@@ -12,7 +12,8 @@ class SlotDataParser {
         for (let i = 0; i < data.paytable.length; i++) {
             paytable.push(data.paytable[i]);
         }
-    
+
+        gameState.maxSelectedLines = paytable.length;
         return {
             gameState,
             init: {

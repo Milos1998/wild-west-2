@@ -10,8 +10,8 @@ export class UiControlls extends BaseControlls {
         this.uiComponent = uiComponent;
     }
 
-    public toggleAllButtonsAndSteppers(visible: boolean): Generator<CallEffect<unknown>, void, unknown> {
-        return this.wrapInGenerator(this.uiComponent, this.uiComponent.toggleAllButtonsAndSteppers, visible)();
+    public toggleAllButtonsAndSteppers(enabled: boolean): Generator<CallEffect<unknown>, void, unknown> {
+        return this.wrapInGenerator(this.uiComponent, this.uiComponent.toggleAllButtonsAndSteppers, enabled)();
     };
 
     public displayUi(visible: boolean): Generator<CallEffect<unknown>, void, unknown> {

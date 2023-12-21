@@ -1,7 +1,8 @@
 import { put, take } from "redux-saga/effects";
 import { slotActions } from "../../store/SlotSlice";
-import { sagaMiddleware, slotState } from "../../store/Store";
+import { sagaMiddleware, slotState, uiState } from "../../store/Store";
 import { BaseStepingMeterComponent } from "./baseComponents/BaseStepingMeterComponent";
+import { uiActions } from "./uiStore/UiSlice";
 
 export class LinesStepingMeterComponent extends BaseStepingMeterComponent {
     protected setReactions() {
@@ -10,24 +11,25 @@ export class LinesStepingMeterComponent extends BaseStepingMeterComponent {
 
     * watchBalance() {
         while(true) {
-            yield take(slotActions.setBalance);
+            yield take(uiActions.setSelectedLines);
             this.setValue();
         }
     }
 
     protected setValue(): void {
-        const { selectedLines } = slotState().gameState;
+        const { selectedLines } = uiState();
         this.valueLabel.text = selectedLines.toString();
     }
 
     protected increment() {
-        const { selectedLines, maxSelectedLines } = slotState().gameState;
+        const { selectedLines, maxSelectedLines } = uiState();
 
         this.decrementButton.enabled = selectedLines + 1 < maxSelectedLines;
         if (selectedLines + 1 > maxSelectedLines) return;
 
         sagaMiddleware.run(function* () {
             yield put(slotActions.setSelectedLines(selectedLines + 1));
+            yield put(uiActions.setSelectedLines(selectedLines + 1));
         });
     }
 
@@ -39,6 +41,7 @@ export class LinesStepingMeterComponent extends BaseStepingMeterComponent {
 
         sagaMiddleware.run(function* () {
             yield put(slotActions.setSelectedLines(selectedLines - 1));
+            yield put(uiActions.setSelectedLines(selectedLines - 1));
         });
     }
 }

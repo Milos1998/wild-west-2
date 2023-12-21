@@ -7,7 +7,7 @@ import { BGFlow } from "./gameFlows/BGFlow";
 import { FSGameFlow } from "./gameFlows/FSGameFlow";
 import { SideEffectsFlow } from "./gameFlows/SideEffectsFlow";
 import { stateMachine } from "./stateMachine/StateMachine";
-import { initSlotStore } from "./store/SlotSagas";
+import { initStoreData } from "./store/SlotSagas";
 import { ReelSetComponent } from "./components/reelSet/ReelSetComponent";
 import { ReelSetControlls } from "./components/reelSet/ReelSetControlls";
 import { UiComponent } from "./components/ui/UiComponent";
@@ -29,7 +29,7 @@ export const rootSaga = function* (): Generator {
 
     sceneController.scene.addChild(layoutUtils.getLayoutItem("game").container);
 
-    yield initSlotStore();
+    yield initStoreData();
     yield put(reelSetActions.setReelImage([...slotState().init.image]));
 
     const controlls = initComponents();

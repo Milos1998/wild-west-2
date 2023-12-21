@@ -1,7 +1,7 @@
 import { take } from "redux-saga/effects";
-import { sagaMiddleware, slotState } from "../../store/Store";
+import { sagaMiddleware, uiState } from "../../store/Store";
 import { BaseMeterComponent } from "./baseComponents/BaseMeterComponent";
-import { slotActions } from "../../store/SlotSlice";
+import { uiActions } from "./uiStore/UiSlice";
 
 export class WinMeterComponent extends BaseMeterComponent {
     protected setReactions() {
@@ -10,13 +10,13 @@ export class WinMeterComponent extends BaseMeterComponent {
 
     * watchWin() {
         while(true) {
-            yield take(slotActions.setWin);
+            yield take(uiActions.setWin);
             this.setValue();
         }
     }
 
     protected setValue(): void {
-        const { win } = slotState().gameState;
+        const { win } = uiState();
         this.valueLabel.text = win.toString();
     }
 }

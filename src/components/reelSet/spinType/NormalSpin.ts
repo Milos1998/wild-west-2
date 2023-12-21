@@ -96,7 +96,7 @@ export class NormalSpin {
             const reel = this.reelSet.reels[i];
             if (reel.spinState !== "SPINNING") continue;
             this.moveReelCells(deltaMs, i);
-            if (this.spinDurationMs > reel.config.stopDelayMs && reelSetState().isReadyToStop) {
+            if (reelSetState().isReadyToStop && (this.spinDurationMs > reel.config.stopDelayMs || slotState().systemState.isSlamStopped)) {
                 this.stoppingCount++;
                 this.spinningCount--;
                 reel.spinState = "STOPPING";

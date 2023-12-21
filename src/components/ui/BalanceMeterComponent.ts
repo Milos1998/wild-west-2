@@ -1,7 +1,8 @@
 import { take } from "redux-saga/effects";
-import { sagaMiddleware, slotState } from "../../store/Store";
+import { sagaMiddleware, slotState, uiState } from "../../store/Store";
 import { BaseMeterComponent } from "./baseComponents/BaseMeterComponent";
 import { slotActions } from "../../store/SlotSlice";
+import { uiActions } from "./uiStore/UiSlice";
 
 export class BalanceMeterComponent extends BaseMeterComponent {
     protected setReactions() {
@@ -10,13 +11,13 @@ export class BalanceMeterComponent extends BaseMeterComponent {
 
     * watchBalance() {
         while(true) {
-            yield take(slotActions.setBalance);
+            yield take(uiActions.setBalance);
             this.setValue();
         }
     }
 
     protected setValue(): void {
-        const { balance } = slotState().gameState;
+        const { balance } = uiState();
         this.valueLabel.text = balance.toString();
     }
 }

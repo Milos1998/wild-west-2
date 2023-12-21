@@ -2,22 +2,21 @@ import { put, retry } from "redux-saga/effects"
 import { slotDataParser } from "./SlotDataParser";
 import { slotActions } from "./SlotSlice";
 import { slotState } from "./Store";
-import { reelSetActions } from "../components/reelSet/reelSetStore/ReelSetSlice";
+import { uiActions } from "../components/ui/uiStore/UiSlice";
 
-export const initSlotStore = function*(): Generator {
+export const initStoreData = function*(): Generator {
     const data = yield retry(5, 2000, fetchInitialData);
     const initParsed = slotDataParser.parseInitData(data);
     yield put(slotActions.setInit(initParsed.init));
-    yield put(slotActions.setBalance(initParsed.gameState.balance));
-    yield put(slotActions.setBetPerLine(initParsed.gameState.betPerLine));
-    yield put(slotActions.setFlow(initParsed.gameState.flow));
-    yield put(slotActions.setFsLeft(initParsed.gameState.fsLeft));
-    yield put(slotActions.setFsWon(initParsed.gameState.fsWon));
-    yield put(slotActions.setMaxBetPerLine(initParsed.gameState.maxBetPerLine));
-    yield put(slotActions.setNextFlow(initParsed.gameState.nextFlow));
-    yield put(slotActions.setSelectedLines(initParsed.gameState.selectedLines));
-    yield put(slotActions.setWin(initParsed.gameState.win));
-    yield put(slotActions.setMaxSelectedLines(initParsed.init.lines.length));
+    yield put(slotActions.setGameState(initParsed.gameState));
+    yield put(uiActions.setBalance(initParsed.gameState.balance));
+    yield put(uiActions.setBetPerLine(initParsed.gameState.betPerLine));
+    yield put(uiActions.setFsLeft(initParsed.gameState.fsLeft));
+    yield put(uiActions.setFsWon(initParsed.gameState.fsWon));
+    yield put(uiActions.setMaxBetPerLine(initParsed.gameState.maxBetPerLine));
+    yield put(uiActions.setMaxSelectedLines(initParsed.gameState.maxSelectedLines));
+    yield put(uiActions.setSelectedLines(initParsed.gameState.selectedLines));
+    yield put(uiActions.setWin(initParsed.gameState.win));
 }
 
 async function fetchInitialData() {
@@ -32,8 +31,7 @@ export const sendSpinRequest = function*(): Generator {
         const data = yield retry(5, 2000, fetchSpinOutcome);
         const spinResponseParsed = slotDataParser.parseSpinData(data);
         yield put(slotActions.setSpinResponse(spinResponseParsed));
-        yield put(slotActions.setFlow(spinResponseParsed.gameState.flow));
-        yield put(slotActions.setNextFlow(spinResponseParsed.gameState.nextFlow));
+        yield put(slotActions.setGameState(spinResponseParsed.gameState));
         yield put(slotActions.setIsRequestSuccessful(true));
     } catch {
         yield put(slotActions.setIsRequestSuccessful(false));

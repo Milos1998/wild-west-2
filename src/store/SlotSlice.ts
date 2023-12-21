@@ -16,6 +16,9 @@ const initialState: SlotStateType = {
     }, systemState: {
         orientation: Orientation.Landscape,
         isRequestSuccessful: true,
+        isSkipped: false,
+        isSlamStopped: false,
+        isSpinPressed: false,
     }
 }
 
@@ -23,35 +26,14 @@ const slotSlice = createSlice({
     name: "slotSlice",
     initialState,
     reducers: {
-        setBalance: (state: SlotStateType, { payload: balance }: PayloadAction<number>) => {
-            state.gameState.balance = balance;
-        },
-        setWin: (state: SlotStateType, { payload: win }: PayloadAction<number>) => {
-            state.gameState.win = win;
-        },
-        setBetPerLine: (state: SlotStateType, { payload: betPerLine }: PayloadAction<number>) => {
-            state.gameState.betPerLine = betPerLine;
-        },
-        setFlow: (state: SlotStateType, { payload: flow }: PayloadAction<string>) => {
-            state.gameState.flow = flow;
-        },
-        setNextFlow: (state: SlotStateType, { payload: nextFlow }: PayloadAction<string>) => {
-            state.gameState.nextFlow = nextFlow;
-        },
-        setFsLeft: (state: SlotStateType, { payload: fsLeft }: PayloadAction<number>) => {
-            state.gameState.fsLeft = fsLeft;
-        },
-        setFsWon: (state: SlotStateType, { payload: fsWon }: PayloadAction<number>) => {
-            state.gameState.fsWon = fsWon;
+        setGameState: (state: SlotStateType, { payload: gameState }: PayloadAction<GameState>) => {
+            state.gameState = gameState;
         },
         setSelectedLines: (state: SlotStateType, { payload: selectedLines }: PayloadAction<number>) => {
             state.gameState.selectedLines = selectedLines;
         },
-        setMaxBetPerLine: (state: SlotStateType, { payload: maxBetPerLine }: PayloadAction<number>) => {
-            state.gameState.maxBetPerLine = maxBetPerLine;
-        },
-        setMaxSelectedLines: (state: SlotStateType, { payload: maxSelectedLines }: PayloadAction<number>) => {
-            state.gameState.maxSelectedLines = maxSelectedLines;
+        setBetPerLine: (state: SlotStateType, { payload: betPerLine }: PayloadAction<number>) => {
+            state.gameState.betPerLine = betPerLine;
         },
         setInit: (state: SlotStateType, { payload: init }: PayloadAction<Init>) => {
             state.init = init;
@@ -64,6 +46,15 @@ const slotSlice = createSlice({
         },
         setIsRequestSuccessful: (state: SlotStateType, { payload: isRequestSuccessful }: PayloadAction<boolean>) => {
             state.systemState.isRequestSuccessful = isRequestSuccessful;
+        },
+        setIsSlamStopped: (state: SlotStateType, { payload: isSlamStopped }: PayloadAction<boolean>) => {
+            state.systemState.isSlamStopped = isSlamStopped;
+        },
+        setIsSpinPressed: (state: SlotStateType, { payload: isSpinPressed }: PayloadAction<boolean>) => {
+            state.systemState.isSpinPressed = isSpinPressed;
+        },
+        setIsSkipped: (state: SlotStateType, { payload: isSkipped }: PayloadAction<boolean>) => {
+            state.systemState.isSkipped = isSkipped;
         },
         setOrientationChanged: (state: SlotStateType) => {
             //TODO pitaj dal ovo moze? Treba mi nesto sto druge komponente mogu da gledaju i da znaju da je zavrsena

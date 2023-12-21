@@ -1,7 +1,7 @@
 import { take } from "redux-saga/effects";
-import { sagaMiddleware, slotState } from "../../store/Store";
+import { sagaMiddleware, uiState } from "../../store/Store";
 import { BaseMeterComponent } from "./baseComponents/BaseMeterComponent";
-import { slotActions } from "../../store/SlotSlice";
+import { uiActions } from "./uiStore/UiSlice";
 
 export class BetMeterComponent extends BaseMeterComponent {
     protected setReactions() {
@@ -11,21 +11,21 @@ export class BetMeterComponent extends BaseMeterComponent {
 
     * watchBetPerLine() {
         while(true) {
-            yield take(slotActions.setBetPerLine);
+            yield take(uiActions.setBetPerLine);
             this.setValue();
         }
     }
 
     * watchSelectedLines() {
         while(true) {
-            yield take(slotActions.setSelectedLines);
+            yield take(uiActions.setSelectedLines);
             this.setValue();
         }
     }
 
     protected setValue(): void {
-        const { betPerLine } = slotState().gameState;
-        const { selectedLines } = slotState().gameState;
+        const { betPerLine } = uiState();
+        const { selectedLines } = uiState();
         this.valueLabel.text = (betPerLine * selectedLines).toString();
     }
 }
