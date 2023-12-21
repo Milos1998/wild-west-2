@@ -1,4 +1,4 @@
-import { put } from "redux-saga/effects";
+import { put, spawn } from "redux-saga/effects";
 import { sagaMiddleware } from "../../store/Store";
 import { BaseComponent } from "../BaseComponent";
 import { Button } from "../button/Button";
@@ -10,6 +10,7 @@ import { LinesStepingMeterComponent } from "./LinesStepingMeterComponent";
 import { WinMeterComponent } from "./WinMeterComponent";
 import { BaseStepingMeterComponent } from "./baseComponents/BaseStepingMeterComponent";
 import { slotActions } from "../../store/SlotSlice";
+import { BaseMeterComponent } from "./baseComponents/BaseMeterComponent";
 
 export type UiSpinButtonId =  "SPIN" | "SKIP" | "SLAM_STOP";
 
@@ -69,6 +70,7 @@ export class UiComponent extends BaseComponent {
         this.allElements.set("FREE_SPINS", freeSpinsMeter);
 
         this.setSpinButtonsActions();
+        this.setMetersReactions();
     }
 
     public toggleAllButtonsAndSteppers(enabled: boolean) {
@@ -132,5 +134,15 @@ export class UiComponent extends BaseComponent {
                 });
             })
         }
+    }
+
+    private setMetersReactions() {
+        this.allElements.forEach((element) => {
+            if (element instanceof BaseMeterComponent) {
+                sagaMiddleware.run(function* () {
+                    yield spawn([element, element.setReactions]);
+                });
+            }
+        })
     }
 }

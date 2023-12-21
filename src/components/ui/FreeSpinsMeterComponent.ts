@@ -1,12 +1,12 @@
-import { take } from "redux-saga/effects";
-import { sagaMiddleware, uiState } from "../../store/Store";
+import { spawn, take } from "redux-saga/effects";
+import { uiState } from "../../store/Store";
 import { BaseMeterComponent } from "./baseComponents/BaseMeterComponent";
 import { uiActions } from "./uiStore/UiSlice";
 
 export class FreeSpinsMeterComponent extends BaseMeterComponent {
-    protected setReactions() {
-        sagaMiddleware.run(this.watchFsLeft);
-        sagaMiddleware.run(this.watchFsWon);
+    * setReactions(): Generator {
+        yield spawn([this, this.watchFsLeft]);
+        yield spawn([this, this.watchFsWon]);
     }
 
     * watchFsLeft() {

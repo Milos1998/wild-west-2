@@ -1,11 +1,11 @@
-import { take } from "redux-saga/effects";
-import { sagaMiddleware, uiState } from "../../store/Store";
+import { spawn, take } from "redux-saga/effects";
+import { uiState } from "../../store/Store";
 import { BaseMeterComponent } from "./baseComponents/BaseMeterComponent";
 import { uiActions } from "./uiStore/UiSlice";
 
 export class WinMeterComponent extends BaseMeterComponent {
-    protected setReactions() {
-        sagaMiddleware.run(this.watchWin);
+    * setReactions(): Generator {
+        yield spawn([this, this.watchWin]);
     }
 
     * watchWin() {

@@ -1,12 +1,12 @@
-import { take } from "redux-saga/effects";
-import { sagaMiddleware, uiState } from "../../store/Store";
+import { spawn, take } from "redux-saga/effects";
+import { uiState } from "../../store/Store";
 import { BaseMeterComponent } from "./baseComponents/BaseMeterComponent";
 import { uiActions } from "./uiStore/UiSlice";
 
 export class BetMeterComponent extends BaseMeterComponent {
-    protected setReactions() {
-        sagaMiddleware.run(this.watchBetPerLine);
-        sagaMiddleware.run(this.watchSelectedLines);
+    * setReactions(): Generator {
+        yield spawn([this, this.watchBetPerLine]);
+        yield spawn([this, this.watchSelectedLines]);
     }
 
     * watchBetPerLine() {

@@ -1,4 +1,4 @@
-import { put, take } from "redux-saga/effects";
+import { put, spawn, take } from "redux-saga/effects";
 import { slotActions } from "../../store/SlotSlice";
 import { sagaMiddleware, uiState } from "../../store/Store";
 import { BaseStepingMeterComponent } from "./baseComponents/BaseStepingMeterComponent";
@@ -8,8 +8,8 @@ import { uiActions } from "./uiStore/UiSlice";
  * Bet per line stepper
  */
 export class BPLStepingMeterComponent extends BaseStepingMeterComponent {
-    protected setReactions() {
-        sagaMiddleware.run(this.watchBetPerLine);
+    * setReactions(): Generator {
+        yield spawn([this, this.watchBetPerLine]);
     }
 
     * watchBetPerLine() {

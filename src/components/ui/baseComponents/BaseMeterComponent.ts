@@ -9,11 +9,10 @@ export class BaseMeterComponent extends BaseComponent {
 
         this.valueLabel = this.container.getChildByName(`${this.name}_value`) as Text;
         if (!this.valueLabel) throw new Error(`Value label ${this.name}_value does not exist on meter component`);
-        // this.setReactions();
         this.setValue();
     }
 
     protected setValue() {}
 
-    protected setReactions() {}
+    * setReactions(): Generator {}
 }

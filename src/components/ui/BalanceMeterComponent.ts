@@ -1,12 +1,11 @@
-import { take } from "redux-saga/effects";
-import { sagaMiddleware, slotState, uiState } from "../../store/Store";
+import { spawn, take } from "redux-saga/effects";
+import { uiState } from "../../store/Store";
 import { BaseMeterComponent } from "./baseComponents/BaseMeterComponent";
-import { slotActions } from "../../store/SlotSlice";
 import { uiActions } from "./uiStore/UiSlice";
 
 export class BalanceMeterComponent extends BaseMeterComponent {
-    protected setReactions() {
-        sagaMiddleware.run(this.watchBalance);
+    * setReactions(): Generator {
+        yield spawn([this, this.watchBalance]);
     }
 
     * watchBalance() {

@@ -1,15 +1,15 @@
-import { put, take } from "redux-saga/effects";
+import { put, spawn, take } from "redux-saga/effects";
 import { slotActions } from "../../store/SlotSlice";
 import { sagaMiddleware, slotState, uiState } from "../../store/Store";
 import { BaseStepingMeterComponent } from "./baseComponents/BaseStepingMeterComponent";
 import { uiActions } from "./uiStore/UiSlice";
 
 export class LinesStepingMeterComponent extends BaseStepingMeterComponent {
-    protected setReactions() {
-        sagaMiddleware.run(this.watchBalance);
+    * setReactions(): Generator {
+        yield spawn([this, this.watchSelectedLines]);
     }
 
-    * watchBalance() {
+    * watchSelectedLines() {
         while(true) {
             yield take(uiActions.setSelectedLines);
             this.setValue();
