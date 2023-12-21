@@ -27,7 +27,10 @@ export class BPLStepingMeterComponent extends BaseStepingMeterComponent {
     protected increment() {
         const { betPerLine, maxBetPerLine } = uiState();
 
-        this.decrementButton.enabled = betPerLine + 1 < maxBetPerLine;
+        this.incrementButton.enabled = betPerLine + 1 < maxBetPerLine;
+        this.wasIncrementEnabled = this.incrementButton.enabled;
+        this.decrementButton.enabled = true;
+        this.wasDecrementEnabled = true;
         if (betPerLine + 1 > maxBetPerLine) return;
 
         sagaMiddleware.run(function* () {
@@ -41,6 +44,8 @@ export class BPLStepingMeterComponent extends BaseStepingMeterComponent {
 
         this.decrementButton.enabled = betPerLine - 1 > 1;
         this.wasDecrementEnabled = this.decrementButton.enabled;
+        this.incrementButton.enabled = true;
+        this.wasIncrementEnabled = true;
         if (betPerLine - 1 < 1) return;
 
         sagaMiddleware.run(function* () {

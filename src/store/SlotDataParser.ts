@@ -13,7 +13,6 @@ class SlotDataParser {
             paytable.push(data.paytable[i]);
         }
 
-        gameState.maxSelectedLines = paytable.length;
         return {
             gameState,
             init: {
@@ -38,20 +37,21 @@ class SlotDataParser {
 
     private parseGameState(gameStateData: any) {
         const gameState = new GameState();
-    
+
         gameState.balance = gameStateData.balance;
         gameState.betPerLine = gameStateData.betPerLine;
         gameState.flow = gameStateData.flow;
         gameState.fsLeft = gameStateData.fsLeft;
         gameState.fsWon = gameStateData.fsWon;
-        gameState.selectedLines = gameStateData.selectedLines;
         gameState.maxBetPerLine = gameStateData.maxBetPerLine;
+        gameState.maxSelectedLines = gameStateData.lines;
+        gameState.selectedLines = gameStateData.lines / 2;
         gameState.nextFlow = gameStateData.nextFlow;
         gameState.win = gameStateData.win;
-    
+
         return gameState;
     }
-    
+
     private parseImage(imageData: any) {
         const image: Image = [];
     

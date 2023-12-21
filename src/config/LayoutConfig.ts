@@ -115,11 +115,11 @@ const landscapeConfigTree: LayoutConfigNode = {
         }, {
             name: "ui",
             type: "container",
-            position: { x: 1000, y: 700 },
             children: [
                 {
                     name: "spinButton",
                     type: "container",
+                    position: { x: 1300, y: 520 },
                     children: [
                         {
                             name: "spinButton_enabled",
@@ -144,6 +144,7 @@ const landscapeConfigTree: LayoutConfigNode = {
                 {
                     name: "skipButton",
                     type: "container",
+                    position: { x: 1300, y: 520 },
                     children: [
                         {
                             name: "skipButton_enabled",
@@ -168,6 +169,7 @@ const landscapeConfigTree: LayoutConfigNode = {
                 {
                     name: "slamStopButton",
                     type: "container",
+                    position: { x: 1300, y: 520 },
                     children: [
                         {
                             name: "slamStopButton_enabled",
@@ -192,6 +194,7 @@ const landscapeConfigTree: LayoutConfigNode = {
                 {
                     name: "autoSpinButton",
                     type: "container",
+                    position: { x: 1300, y: 700 },
                     children: [
                         {
                             name: "autoSpinButton_enabled",
@@ -217,6 +220,7 @@ const landscapeConfigTree: LayoutConfigNode = {
                     name: "linesMeter",
                     type: "sprite",
                     texture: "uiBg",
+                    position: { x: 430, y: 500 },
                     children: [
                         {
                             name: "linesMeter_label",
@@ -263,14 +267,14 @@ const landscapeConfigTree: LayoutConfigNode = {
                                     type: "sprite",
                                     anchor: { x: 0, y: 0.5 },
                                     position: { x: 5, y: 50 },
-                                    texture: "increment_enabled",    
+                                    texture: "decrement_enabled",
                                 },
                                 {
                                     name: "linesMeter_decrement_disabled",
                                     type: "sprite",
                                     anchor: { x: 0, y: 0.5 },
                                     position: { x: 5, y: 50 },
-                                    texture: "increment_disabled",    
+                                    texture: "decrement_disabled",
                                 },
                             ],
                         },
@@ -280,6 +284,7 @@ const landscapeConfigTree: LayoutConfigNode = {
                     name: "betPerLineMeter",
                     type: "sprite",
                     texture: "uiBg",
+                    position: { x: 430, y: 620 },
                     children: [
                         {
                             name: "betPerLineMeter_label",
@@ -326,14 +331,14 @@ const landscapeConfigTree: LayoutConfigNode = {
                                     type: "sprite",
                                     anchor: { x: 0, y: 0.5 },
                                     position: { x: 5, y: 50 },
-                                    texture: "increment_enabled",    
+                                    texture: "decrement_enabled",
                                 },
                                 {
                                     name: "betPerLineMeter_decrement_disabled",
                                     type: "sprite",
                                     anchor: { x: 0, y: 0.5 },
                                     position: { x: 5, y: 50 },
-                                    texture: "increment_disabled",    
+                                    texture: "decrement_disabled",
                                 },
                             ],
                         },
@@ -343,6 +348,7 @@ const landscapeConfigTree: LayoutConfigNode = {
                     name: "winMeter",
                     type: "sprite",
                     texture: "uiBg",
+                    position: { x: 700, y: 850 },
                     children: [
                         {
                             name: "winMeter_label",
@@ -366,6 +372,7 @@ const landscapeConfigTree: LayoutConfigNode = {
                     name: "balanceMeter",
                     type: "sprite",
                     texture: "uiBg",
+                    position: { x: 1000, y: 850 },
                     children: [
                         {
                             name: "balanceMeter_label",
@@ -389,6 +396,7 @@ const landscapeConfigTree: LayoutConfigNode = {
                     name: "totalBetMeter",
                     type: "sprite",
                     texture: "uiBg",
+                    position: { x: 430, y: 740 },
                     children: [
                         {
                             name: "totalBetMeter_label",

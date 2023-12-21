@@ -17,14 +17,17 @@ export class LinesStepingMeterComponent extends BaseStepingMeterComponent {
     }
 
     protected setValue(): void {
-        const { selectedLines } = uiState();
+        const selectedLines = uiState().selectedLines;
         this.valueLabel.text = selectedLines.toString();
     }
 
     protected increment() {
         const { selectedLines, maxSelectedLines } = uiState();
 
-        this.decrementButton.enabled = selectedLines + 1 < maxSelectedLines;
+        this.incrementButton.enabled = selectedLines + 1 < maxSelectedLines;
+        this.wasIncrementEnabled = this.incrementButton.enabled;
+        this.decrementButton.enabled = true;
+        this.wasDecrementEnabled = true;
         if (selectedLines + 1 > maxSelectedLines) return;
 
         sagaMiddleware.run(function* () {
@@ -37,6 +40,9 @@ export class LinesStepingMeterComponent extends BaseStepingMeterComponent {
         const { selectedLines } = slotState().gameState;
 
         this.decrementButton.enabled = selectedLines - 1 > 1;
+        this.wasDecrementEnabled = this.decrementButton.enabled;
+        this.incrementButton.enabled = true;
+        this.wasIncrementEnabled = true;
         if (selectedLines - 1 < 1) return;
 
         sagaMiddleware.run(function* () {

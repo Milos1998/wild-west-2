@@ -13,7 +13,7 @@ const initialState: UiStateType = {
 }
 
 const uiSlice = createSlice({
-    name: "reelSetSlice",
+    name: "uiSlice",
     initialState,
     reducers: {
         setBalance: (state: UiStateType, { payload: balance }: PayloadAction<number>) => {

@@ -36,26 +36,35 @@ export class UiComponent extends BaseComponent {
         const spinButton = new Button("spinButton");
         this.allButtons.set("SPIN", spinButton);
         this.allElements.set("SPIN", spinButton);
+
         const skipButton = new Button("skipButton");
         this.allButtons.set("SKIP", skipButton);
         this.allElements.set("SKIP", skipButton);
+
         const slamStopButton = new Button("slamStopButton");
         this.allButtons.set("SLAM_STOP", slamStopButton);
         this.allElements.set("SLAM_STOP", slamStopButton);
+
         const autoSpinButton = new Button("autoSpinButton")
         this.allElements.set("AUTO_SPIN", autoSpinButton);
+
         const linesMeter = new LinesStepingMeterComponent("linesMeter")
         this.allSteppers.set("LINES", linesMeter);
         this.allElements.set("LINES", linesMeter);
+
         const betPerLineMeter = new BPLStepingMeterComponent("betPerLineMeter")
         this.allSteppers.set("BET_PER_LINE", betPerLineMeter);
         this.allElements.set("BET_PER_LINE", betPerLineMeter);
+
         const winMeter = new WinMeterComponent("winMeter");
         this.allElements.set("WIN", winMeter);
+
         const balanceMeter = new BalanceMeterComponent("balanceMeter");
         this.allElements.set("BALANCE", balanceMeter);
+
         const totalBetMeter = new BetMeterComponent("totalBetMeter");
         this.allElements.set("TOTAL_BET", totalBetMeter);
+
         const freeSpinsMeter = new FreeSpinsMeterComponent("freeSpinsMeter");
         this.allElements.set("FREE_SPINS", freeSpinsMeter);
 

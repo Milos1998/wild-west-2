@@ -36,6 +36,7 @@ export class BGFlow extends GeneralGameFlow {
         yield put(slotActions.setIsSkipped(false));
         yield this.flowControlls.uiControlls.setSpinButton("SPIN", true);
         yield take(slotActions.setIsSpinPressed);
+        yield this.flowControlls.uiControlls.toggleAllButtonsAndSteppers(false);
         yield this.flowControlls.reelSetControlls.startSpin();
     }
 
@@ -61,7 +62,9 @@ export class BGFlow extends GeneralGameFlow {
     /**
      * Here win presentation should be played
      */
-    * onDisplayAward() {}
+    * onDisplayAward() {
+        yield this.flowControlls.uiControlls.toggleAllButtonsAndSteppers(true);
+    }
 
     /**
      * setup this flow before exiting to another

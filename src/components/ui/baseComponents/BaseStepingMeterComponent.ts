@@ -4,11 +4,11 @@ import { BaseMeterComponent } from "./BaseMeterComponent";
 export class BaseStepingMeterComponent extends BaseMeterComponent {
     protected incrementButton: Button;
 
-    protected wasIncrementEnabled: boolean = false;
+    protected wasIncrementEnabled: boolean = true;
 
     protected decrementButton: Button;
 
-    protected wasDecrementEnabled: boolean = false;
+    protected wasDecrementEnabled: boolean = true;
 
     protected enabled: boolean = false;
 
@@ -16,9 +16,9 @@ export class BaseStepingMeterComponent extends BaseMeterComponent {
         super(layoutId);
 
         this.incrementButton = new Button(`${this.name}_increment`);
-        this.incrementButton.setOnAction = this.increment.bind(this);
+        this.incrementButton.setOnAction(this.increment.bind(this));
         this.decrementButton = new Button(`${this.name}_decrement`);
-        this.decrementButton.setOnAction = this.decrement.bind(this);
+        this.decrementButton.setOnAction(this.decrement.bind(this));
     }
 
     protected increment() {}

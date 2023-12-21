@@ -47,7 +47,7 @@ export class Button extends BaseComponent {
     public set enabled(enabled: boolean) {
         this._enabled = enabled;
         this.container.eventMode = enabled ? "static" : "none";
-        this.setActiveSprite(this.spriteDisabled);
+        this.setActiveSprite(enabled ? this.spriteEnabled : this.spriteDisabled);
     }
 
     public get enabled () {
