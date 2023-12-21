@@ -1,8 +1,11 @@
-import { delay, take } from "redux-saga/effects";
+import { delay, fork, put, take } from "redux-saga/effects";
 import { UiElementId } from "../components/ui/UiComponent";
 import { GeneralGameFlow } from "./GeneralGameFlow";
 import { slotActions } from "../store/SlotSlice";
 import { assetLoader } from "../controllers/AssetLoader";
+import { reelSetActions } from "../components/reelSet/reelSetStore/ReelSetSlice";
+import { slotState } from "../store/Store";
+import { sendSpinRequest } from "../store/SlotSagas";
 
 /**
  * Base game flow
@@ -36,15 +39,17 @@ export class BGFlow extends GeneralGameFlow {
      * Here request is made and game is waiting for response
      */
     * onMakeRequest() {
-        yield take(slotActions.setSpinResponse);
+        yield sendSpinRequest();
     }
 
     /**
      * Here reels should stop and preshow can be played
      */
     * onSuccessfulResponse() {
-        // yield put(reelSetActions.setReelImage(slotState().response.reelImage));
+        yield put(reelSetActions.setIsReadyToStop(true));
+        yield put(reelSetActions.setReelImage(slotState().response.reelImage));
         yield this.flowControlls.reelSetControlls.stopSpin();
+        yield put(reelSetActions.setIsReadyToStop(false));
     }
 
     /**

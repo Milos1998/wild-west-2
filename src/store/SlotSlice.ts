@@ -62,6 +62,9 @@ const slotSlice = createSlice({
         setOrientation: (state: SlotStateType, { payload: orientation }: PayloadAction<Orientation>) => {
             state.systemState.orientation = orientation;
         },
+        setIsRequestSuccessful: (state: SlotStateType, { payload: isRequestSuccessful }: PayloadAction<boolean>) => {
+            state.systemState.isRequestSuccessful = isRequestSuccessful;
+        },
         setOrientationChanged: (state: SlotStateType) => {
             //TODO pitaj dal ovo moze? Treba mi nesto sto druge komponente mogu da gledaju i da znaju da je zavrsena
             //promena orijentacije kada je to pozvano?

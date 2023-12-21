@@ -22,10 +22,10 @@ export class NormalSpin {
     constructor(reelSet: ReelSetComponent) {
         this.reelSet = reelSet;
         this.stoppedCount = this.reelSet.reels.length;
+        this.setPaddingCells();
     }
 
     public async spinReels(): Promise<void> {
-        this.setPaddingCells();
         this.spinDurationMs = 0;
         this.stoppedCount = this.reelSet.reels.length;
 
@@ -35,6 +35,7 @@ export class NormalSpin {
             this.resolveSpin = resolve;
         });
 
+        const reelImage = reelSetState().reelImage;
         sceneController.ticker.remove(this.spinTick, this);
 
         return Promise.resolve();

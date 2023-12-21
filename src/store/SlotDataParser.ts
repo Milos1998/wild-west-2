@@ -1,4 +1,4 @@
-import { Cell, GameState, Image, Init, Line, PaytableItem, Symbol } from "./SlotTypes";
+import { Cell, GameState, Image, Init, Line, PaytableItem, SpinResponse, Symbol, WinLine } from "./SlotTypes";
 
 class SlotDataParser {
     public parseInitData(data: any): { init: Init, gameState: GameState} {
@@ -18,11 +18,23 @@ class SlotDataParser {
             init: {
                 image,
                 lines,
-                paytable
+                paytable,
             },
         }
     }
-    
+
+    public parseSpinData(data: any): SpinResponse {
+        const gameState = this.parseGameState(data.gameState);
+        const reelImage = this.parseImage(data.image);
+        const highlight = this.parseHighlight(data.highlight);
+
+        return {
+            gameState,
+            reelImage,
+            highlight,
+        }
+    }
+
     private parseGameState(gameStateData: any) {
         const gameState = new GameState();
     
@@ -51,6 +63,24 @@ class SlotDataParser {
         }
 
         return image;
+    }
+
+    private parseHighlight(highlightData: any): WinLine[] {
+        const highlight: WinLine[] = [];
+    
+        for (let i = 0; i < highlightData.length; i++) {
+            const winCells: Cell[] = [];
+            for (let j = 0; j < highlightData[i].winCells.length; j++) {
+                winCells.push(this.makeCell(highlightData[i].winCells[j]));
+            }
+            highlight.push({
+                payout: highlightData[i].payout,
+                winSymbol: highlightData[i].winSymbol,
+                winCells
+            })
+        }
+
+        return highlight;
     }
 
     private makeCell(cellData: any): Cell {

@@ -57,7 +57,7 @@ export type Cell = {
     symbol: Symbol;
 }
 
-type WinLine = {
+export type WinLine = {
     winSymbol: Symbol;
     winCells: Cell[];
     payout: number;

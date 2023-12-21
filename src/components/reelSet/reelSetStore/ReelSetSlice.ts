@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ReelSetStateType } from "./ReelSetTypes";
-import { Image } from "../../../store/SlotTypes";
+import { Cell, Image } from "../../../store/SlotTypes";
 
 const initialState: ReelSetStateType = {
     reelImage: [],
-    isReadyToStop: true,
+    isReadyToStop: false,
 }
 
 const reelSetSlice = createSlice({
@@ -12,7 +12,19 @@ const reelSetSlice = createSlice({
     initialState,
     reducers: {
         setReelImage: (state: ReelSetStateType, { payload: reelImage }: PayloadAction<Image>) => {
-            state.reelImage = reelImage;
+            const imageCopy: Image = [];
+
+            reelImage.forEach((reel) => {
+                const reelCopy: Cell[] = [];
+                for (const cell of reel) {
+                    reelCopy.push({
+                        position: { cell: cell.position.cell, reel: cell.position.reel },
+                        symbol: cell.symbol
+                    })
+                }
+                imageCopy.push(reelCopy);
+            })
+            state.reelImage = imageCopy;
         },
         setIsReadyToStop: (state: ReelSetStateType, { payload: isReadyToStop }: PayloadAction<boolean>) => {
             state.isReadyToStop = isReadyToStop;
