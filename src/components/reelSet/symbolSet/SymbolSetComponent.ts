@@ -20,7 +20,12 @@ class SymbolSetComponent {
         });
     }
 
-    public getSymbol(symbol: Symbol, blurred: boolean = false): PixiObjectsPoolEntry {
+    public getRandomSymbol(blurred: boolean = false): Symbol {
+        const index = Math.floor(Math.random() * this.allSymbols.length);
+        return this.allSymbols[index];
+    }
+
+    public getPooledSymbolObject(symbol: Symbol, blurred: boolean = false): PixiObjectsPoolEntry {
         const poolKey = symbol + (blurred ? this.blurPrefix : "");
         const pool = this.pool.get(poolKey);
         if (pool === undefined) throw new Error(`Pool ${poolKey} does not exist`);

@@ -12,6 +12,7 @@ export class BGFlow extends GeneralGameFlow {
      */
     * onBeforeDisplay() {
         yield this.flowControlls.uiControlls.toggleAllButtonsAndSteppers(true);
+        yield this.flowControlls.reelSetControlls.startSpin();
     }
 
     /**
@@ -32,7 +33,9 @@ export class BGFlow extends GeneralGameFlow {
     /**
      * Here reels should stop and preshow can be played
      */
-    * onSuccessfulResponse() {}
+    * onSuccessfulResponse() {
+        yield this.flowControlls.reelSetControlls.stopSpin();
+    }
 
     /**
      * Here win presentation should be played
@@ -47,5 +50,7 @@ export class BGFlow extends GeneralGameFlow {
     /**
      * Run when bad request has ben sent, request timeout or insuficient funds
      */
-    * onBadRequest() {}
+    * onBadRequest() {
+        yield this.flowControlls.reelSetControlls.stopSpin();
+    }
 }

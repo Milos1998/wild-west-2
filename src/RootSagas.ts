@@ -41,7 +41,7 @@ export const rootSaga = function* (): Generator {
 
 function initComponents(): GameControlls {
     const reelSet = new ReelSetComponent("reels");
-    const reelSetControlls = new ReelSetControlls();
+    const reelSetControlls = new ReelSetControlls(reelSet);
 
     const ui = new UiComponent("ui");
     const uiControlls = new UiControlls(ui);

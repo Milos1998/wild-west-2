@@ -14,3 +14,4 @@ const store = configureStore({
 });
 
 export const slotState = () => store.getState().slotReducer;
+export const reelSetState = () => store.getState().reelSetReducer;
