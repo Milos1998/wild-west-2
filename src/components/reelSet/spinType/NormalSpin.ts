@@ -52,13 +52,13 @@ export class NormalSpin {
         })
     }
 
-    private spinTick(deltaMs: number) {
-        this.spinDurationMs += deltaMs;
+    private spinTick() {
+        this.spinDurationMs += sceneController.ticker.deltaMS;
 
         if (this.stoppedCount > 0) this.updateStoppedReels();
-        if (this.startedCount > 0) this.updateStartedReels(deltaMs);
-        if (this.spinningCount > 0) this.updateSpinningReels(deltaMs);
-        if (this.stoppingCount > 0) this.updateStoppingReels(deltaMs);
+        if (this.startedCount > 0) this.updateStartedReels(sceneController.ticker.deltaMS);
+        if (this.spinningCount > 0) this.updateSpinningReels(sceneController.ticker.deltaMS);
+        if (this.stoppingCount > 0) this.updateStoppingReels(sceneController.ticker.deltaMS);
     }
 
     private updateStoppedReels() {
@@ -123,7 +123,7 @@ export class NormalSpin {
                 this.stoppingCount--;
                 reel.spinState = "STOPPED";
 
-                if (this.stoppedCount === this.reelSet.reels.length) this.resolveSpin();
+                if (this.stoppingCount === 0) this.resolveSpin();
                 this.snapToEndPosition(reel);
             }
         }

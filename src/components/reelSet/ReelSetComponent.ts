@@ -41,8 +41,8 @@ export class ReelSetComponent extends BaseComponent {
         this.spinPromise = this.spinType.spinReels();
     }
 
-    public stopSpin(): Promise<void> {
-        if (this.spinPromise !== undefined) return this.spinPromise;
+    public async stopSpin(): Promise<void> {
+        if (this.spinPromise) return this.spinPromise;
         return Promise.resolve();
     }
 }

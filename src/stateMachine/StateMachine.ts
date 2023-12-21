@@ -23,7 +23,7 @@ class StateMachine {
 
     private getNextInstruction() {
         if (this.currentState === "onBeforeDisplay") {
-            this.currentState = "onBeforeDisplay";
+            this.currentState = "onBeforeRequest";
             return this.runningFlow.onBeforeRequest;
         } else if (this.currentState === "onBeforeRequest") {
             this.currentState = "onMakeRequest";
@@ -52,6 +52,9 @@ class StateMachine {
             this.runningFlow = this.getNextFlow();
             return this.runningFlow.onReturnToFlow;
         } else if (this.currentState === "onReturnToFlow") {
+            this.currentState = "onBeforeRequest";
+            return this.runningFlow.onBeforeRequest;
+        } else if (this.currentState === "onBadRequest") {
             this.currentState = "onBeforeRequest";
             return this.runningFlow.onBeforeRequest;
         }
