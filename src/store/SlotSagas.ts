@@ -45,6 +45,9 @@ async function fetchSpinOutcome() {
             betPerLine: slotState().gameState.betPerLine,
             lines: slotState().gameState.selectedLines,
         }),
+        headers: {
+            "Content-Type": "application/json",
+        },
     });
     if (!response.ok) throw new Error(`Not able to fetch spin outcome, status code: ${response.status}`);
 

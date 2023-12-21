@@ -466,9 +466,369 @@ const portraitConfigTree: LayoutConfigNode = {
         }, {
             name: "reels",
             type: "container",
+            position: { x: 700, y: 500 },
+            scale: { x: 1, y: 1 },
             children: [
+                {
+                    name: "reel0",
+                    type: "sprite",
+                    texture: "reelBg",
+                    position: { x: 0, y: 0 },
+                },
+                {
+                    name: "reel1",
+                    type: "sprite",
+                    texture: "reelBg",
+                    position: { x: 117, y: 0 },
+                },
+                {
+                    name: "reel2",
+                    type: "sprite",
+                    texture: "reelBg",
+                    position: { x: 234, y: 0 },
+                },
+                {
+                    name: "reel3",
+                    type: "sprite",
+                    texture: "reelBg",
+                    position: { x: 351, y: 0 },
+                },
+                {
+                    name: "reel4",
+                    type: "sprite",
+                    texture: "reelBg",
+                    position: { x: 468, y: 0 },
+                },
             ],
-        }
+        }, {
+            name: "ui",
+            type: "container",
+            children: [
+                {
+                    name: "spinButton",
+                    type: "container",
+                    position: { x: 1300, y: 520 },
+                    children: [
+                        {
+                            name: "spinButton_enabled",
+                            type: "sprite",
+                            anchor: { x: 0.5, y: 0.5 },
+                            position: { x: 70, y: 70 },
+                        },
+                        {
+                            name: "spinButton_over",
+                            type: "sprite",
+                            anchor: { x: 0.5, y: 0.5 },
+                            position: { x: 70, y: 70 },
+                        },
+                        {
+                            name: "spinButton_disabled",
+                            type: "sprite",
+                            anchor: { x: 0.5, y: 0.5 },
+                            position: { x: 70, y: 70 },
+                        },
+                    ]
+                },
+                {
+                    name: "skipButton",
+                    type: "container",
+                    position: { x: 1300, y: 520 },
+                    children: [
+                        {
+                            name: "skipButton_enabled",
+                            type: "sprite",
+                            anchor: { x: 0.5, y: 0.5 },
+                            position: { x: 70, y: 70 },
+                        },
+                        {
+                            name: "skipButton_over",
+                            type: "sprite",
+                            anchor: { x: 0.5, y: 0.5 },
+                            position: { x: 70, y: 70 },
+                        },
+                        {
+                            name: "skipButton_disabled",
+                            type: "sprite",
+                            anchor: { x: 0.5, y: 0.5 },
+                            position: { x: 70, y: 70 },
+                        },
+                    ]
+                },
+                {
+                    name: "slamStopButton",
+                    type: "container",
+                    position: { x: 1300, y: 520 },
+                    children: [
+                        {
+                            name: "slamStopButton_enabled",
+                            type: "sprite",
+                            anchor: { x: 0.5, y: 0.5 },
+                            position: { x: 70, y: 70 },
+                        },
+                        {
+                            name: "slamStopButton_over",
+                            type: "sprite",
+                            anchor: { x: 0.5, y: 0.5 },
+                            position: { x: 70, y: 70 },
+                        },
+                        {
+                            name: "slamStopButton_disabled",
+                            type: "sprite",
+                            anchor: { x: 0.5, y: 0.5 },
+                            position: { x: 70, y: 70 },
+                        },
+                    ]
+                },
+                {
+                    name: "autoSpinButton",
+                    type: "container",
+                    position: { x: 1300, y: 700 },
+                    children: [
+                        {
+                            name: "autoSpinButton_enabled",
+                            type: "sprite",
+                            anchor: { x: 0.5, y: 0.5 },
+                            position: { x: 70, y: 70 },
+                        },
+                        {
+                            name: "autoSpinButton_over",
+                            type: "sprite",
+                            anchor: { x: 0.5, y: 0.5 },
+                            position: { x: 70, y: 70 },
+                        },
+                        {
+                            name: "autoSpinButton_disabled",
+                            type: "sprite",
+                            anchor: { x: 0.5, y: 0.5 },
+                            position: { x: 70, y: 70 },
+                        },
+                    ]
+                },
+                {
+                    name: "linesMeter",
+                    type: "sprite",
+                    texture: "uiBg",
+                    position: { x: 430, y: 500 },
+                    children: [
+                        {
+                            name: "linesMeter_label",
+                            type: "text",
+                            anchor: { x: 0.5, y: 0.5 },
+                            fontSize: 20,
+                            position: { x: 125, y: 80 },
+                            text: messages.linesMeter_label,
+                        },
+                        {
+                            name: "linesMeter_value",
+                            type: "text",
+                            anchor: { x: 0.5, y: 0.5 },
+                            fontSize: 30,
+                            position: { x: 125, y: 40 },
+                            text: "value text",
+                        },
+                        {
+                            name: "linesMeter_increment",
+                            type: "container",
+                            children: [
+                                {
+                                    name: "linesMeter_increment_enabled",
+                                    type: "sprite",
+                                    anchor: { x: 1, y: 0.5 },
+                                    position: { x: 245, y: 50 },
+                                    texture: "increment_enabled",    
+                                },
+                                {
+                                    name: "linesMeter_increment_disabled",
+                                    type: "sprite",
+                                    anchor: { x: 1, y: 0.5 },
+                                    position: { x: 245, y: 50 },
+                                    texture: "increment_disabled",    
+                                },
+                            ],
+                        },
+                        {
+                            name: "linesMeter_decrement",
+                            type: "container",
+                            children: [
+                                {
+                                    name: "linesMeter_decrement_enabled",
+                                    type: "sprite",
+                                    anchor: { x: 0, y: 0.5 },
+                                    position: { x: 5, y: 50 },
+                                    texture: "decrement_enabled",
+                                },
+                                {
+                                    name: "linesMeter_decrement_disabled",
+                                    type: "sprite",
+                                    anchor: { x: 0, y: 0.5 },
+                                    position: { x: 5, y: 50 },
+                                    texture: "decrement_disabled",
+                                },
+                            ],
+                        },
+                    ]
+                },
+                {
+                    name: "betPerLineMeter",
+                    type: "sprite",
+                    texture: "uiBg",
+                    position: { x: 430, y: 620 },
+                    children: [
+                        {
+                            name: "betPerLineMeter_label",
+                            type: "text",
+                            anchor: { x: 0.5, y: 0.5 },
+                            fontSize: 20,
+                            position: { x: 125, y: 80 },
+                            text: messages.betPerLineMeter_label,
+                        },
+                        {
+                            name: "betPerLineMeter_value",
+                            type: "text",
+                            anchor: { x: 0.5, y: 0.5 },
+                            fontSize: 30,
+                            position: { x: 125, y: 40 },
+                            text: "value text",
+                        },
+                        {
+                            name: "betPerLineMeter_increment",
+                            type: "container",
+                            children: [
+                                {
+                                    name: "betPerLineMeter_increment_enabled",
+                                    type: "sprite",
+                                    anchor: { x: 1, y: 0.5 },
+                                    position: { x: 245, y: 50 },
+                                    texture: "increment_enabled",    
+                                },
+                                {
+                                    name: "betPerLineMeter_increment_disabled",
+                                    type: "sprite",
+                                    anchor: { x: 1, y: 0.5 },
+                                    position: { x: 245, y: 50 },
+                                    texture: "increment_disabled",    
+                                },
+                            ],
+                        },
+                        {
+                            name: "betPerLineMeter_decrement",
+                            type: "container",
+                            children: [
+                                {
+                                    name: "betPerLineMeter_decrement_enabled",
+                                    type: "sprite",
+                                    anchor: { x: 0, y: 0.5 },
+                                    position: { x: 5, y: 50 },
+                                    texture: "decrement_enabled",
+                                },
+                                {
+                                    name: "betPerLineMeter_decrement_disabled",
+                                    type: "sprite",
+                                    anchor: { x: 0, y: 0.5 },
+                                    position: { x: 5, y: 50 },
+                                    texture: "decrement_disabled",
+                                },
+                            ],
+                        },
+                    ]
+                },
+                {
+                    name: "winMeter",
+                    type: "sprite",
+                    texture: "uiBg",
+                    position: { x: 700, y: 850 },
+                    children: [
+                        {
+                            name: "winMeter_label",
+                            type: "text",
+                            anchor: { x: 0.5, y: 0.5 },
+                            fontSize: 20,
+                            position: { x: 125, y: 80 },
+                            text: messages.winMeter_label,
+                        },
+                        {
+                            name: "winMeter_value",
+                            type: "text",
+                            anchor: { x: 0.5, y: 0.5 },
+                            fontSize: 30,
+                            position: { x: 125, y: 40 },
+                            text: "value text",
+                        },
+                    ]
+                },
+                {
+                    name: "balanceMeter",
+                    type: "sprite",
+                    texture: "uiBg",
+                    position: { x: 1000, y: 850 },
+                    children: [
+                        {
+                            name: "balanceMeter_label",
+                            type: "text",
+                            anchor: { x: 0.5, y: 0.5 },
+                            fontSize: 20,
+                            position: { x: 125, y: 80 },
+                            text: messages.balanceMeter_label,
+                        },
+                        {
+                            name: "balanceMeter_value",
+                            type: "text",
+                            anchor: { x: 0.5, y: 0.5 },
+                            fontSize: 30,
+                            position: { x: 125, y: 40 },
+                            text: "value text",
+                        },
+                    ]
+                },
+                {
+                    name: "totalBetMeter",
+                    type: "sprite",
+                    texture: "uiBg",
+                    position: { x: 430, y: 740 },
+                    children: [
+                        {
+                            name: "totalBetMeter_label",
+                            type: "text",
+                            anchor: { x: 0.5, y: 0.5 },
+                            fontSize: 20,
+                            position: { x: 125, y: 80 },
+                            text: messages.totalBetMeter_label,
+                        },
+                        {
+                            name: "totalBetMeter_value",
+                            type: "text",
+                            anchor: { x: 0.5, y: 0.5 },
+                            fontSize: 30,
+                            position: { x: 125, y: 40 },
+                            text: "value text",
+                        },
+                    ]
+                },
+                {
+                    name: "freeSpinsMeter",
+                    type: "sprite",
+                    texture: "uiBg",
+                    children: [
+                        {
+                            name: "freeSpinsMeter_label",
+                            type: "text",
+                            anchor: { x: 0.5, y: 0.5 },
+                            fontSize: 20,
+                            position: { x: 125, y: 80 },
+                            text: messages.freeSpinsMeter_label,
+                        },
+                        {
+                            name: "freeSpinsMeter_value",
+                            type: "text",
+                            anchor: { x: 0.5, y: 0.5 },
+                            fontSize: 30,
+                            position: { x: 125, y: 40 },
+                            text: "value text",
+                        },
+                    ]
+                },
+            ]
+        },
     ],
 }
 

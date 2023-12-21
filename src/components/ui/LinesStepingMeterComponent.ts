@@ -37,7 +37,7 @@ export class LinesStepingMeterComponent extends BaseStepingMeterComponent {
     }
 
     protected decrement() {
-        const { selectedLines } = slotState().gameState;
+        const { selectedLines } = uiState();
 
         this.decrementButton.enabled = selectedLines - 1 > 1;
         this.wasDecrementEnabled = this.decrementButton.enabled;
