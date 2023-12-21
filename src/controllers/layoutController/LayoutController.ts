@@ -59,7 +59,7 @@ class LayoutController {
         node.position.x = layoutNode.position.x;
         node.position.y = layoutNode.position.y;
         node.alpha = layoutNode.alpha;
-        node.visible = layoutNode.visible;
+        // node.visible = layoutNode.visible;
         //important! order is important because text extends sprite
         if (node instanceof Text && layoutNode instanceof TextNode) {
             (node as Text).anchor.x = layoutNode.anchor.x;
