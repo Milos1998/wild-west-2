@@ -466,7 +466,7 @@ const portraitConfigTree: LayoutConfigNode = {
         }, {
             name: "reels",
             type: "container",
-            position: { x: 700, y: 500 },
+            position: { x: 430, y: 600 },
             scale: { x: 1, y: 1 },
             children: [
                 {
@@ -507,7 +507,7 @@ const portraitConfigTree: LayoutConfigNode = {
                 {
                     name: "spinButton",
                     type: "container",
-                    position: { x: 1300, y: 520 },
+                    position: { x: 650, y: 1250 },
                     children: [
                         {
                             name: "spinButton_enabled",
@@ -532,7 +532,7 @@ const portraitConfigTree: LayoutConfigNode = {
                 {
                     name: "skipButton",
                     type: "container",
-                    position: { x: 1300, y: 520 },
+                    position: { x: 650, y: 1250 },
                     children: [
                         {
                             name: "skipButton_enabled",
@@ -557,7 +557,7 @@ const portraitConfigTree: LayoutConfigNode = {
                 {
                     name: "slamStopButton",
                     type: "container",
-                    position: { x: 1300, y: 520 },
+                    position: { x: 650, y: 1250 },
                     children: [
                         {
                             name: "slamStopButton_enabled",
@@ -582,7 +582,7 @@ const portraitConfigTree: LayoutConfigNode = {
                 {
                     name: "autoSpinButton",
                     type: "container",
-                    position: { x: 1300, y: 700 },
+                    position: { x: 800, y: 1250 },
                     children: [
                         {
                             name: "autoSpinButton_enabled",
@@ -608,7 +608,8 @@ const portraitConfigTree: LayoutConfigNode = {
                     name: "linesMeter",
                     type: "sprite",
                     texture: "uiBg",
-                    position: { x: 430, y: 500 },
+                    position: { x: 350, y: 1150 },
+                    scale: { x: 0.9, y: 0.9 },
                     children: [
                         {
                             name: "linesMeter_label",
@@ -672,7 +673,8 @@ const portraitConfigTree: LayoutConfigNode = {
                     name: "betPerLineMeter",
                     type: "sprite",
                     texture: "uiBg",
-                    position: { x: 430, y: 620 },
+                    position: { x: 850, y: 1150 },
+                    scale: { x: 0.9, y: 0.9 },
                     children: [
                         {
                             name: "betPerLineMeter_label",
@@ -736,7 +738,8 @@ const portraitConfigTree: LayoutConfigNode = {
                     name: "winMeter",
                     type: "sprite",
                     texture: "uiBg",
-                    position: { x: 700, y: 850 },
+                    position: { x: 750, y: 1000 },
+                    scale: { x: 0.9, y: 0.9 },
                     children: [
                         {
                             name: "winMeter_label",
@@ -760,7 +763,8 @@ const portraitConfigTree: LayoutConfigNode = {
                     name: "balanceMeter",
                     type: "sprite",
                     texture: "uiBg",
-                    position: { x: 1000, y: 850 },
+                    position: { x: 500, y: 1000 },
+                    scale: { x: 0.9, y: 0.9 },
                     children: [
                         {
                             name: "balanceMeter_label",
@@ -784,7 +788,8 @@ const portraitConfigTree: LayoutConfigNode = {
                     name: "totalBetMeter",
                     type: "sprite",
                     texture: "uiBg",
-                    position: { x: 430, y: 740 },
+                    position: { x: 600, y: 1150 },
+                    scale: { x: 0.9, y: 0.9 },
                     children: [
                         {
                             name: "totalBetMeter_label",

@@ -64,7 +64,6 @@ class LayoutController {
         if (node instanceof Text && layoutNode instanceof TextNode) {
             (node as Text).anchor.x = layoutNode.anchor.x;
             (node as Text).anchor.y = layoutNode.anchor.y;
-            (node as Text).text = layoutNode.text;
             (node as Text).style.fontSize = layoutNode.fontSize;
         } else if (node instanceof Sprite && layoutNode instanceof SpriteNode) {
             (node as Sprite).anchor.x = layoutNode.anchor.x;
