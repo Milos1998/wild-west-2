@@ -81,8 +81,6 @@ class StateMachine {
         let instruction = this.runningFlow.onBeforeDisplay;
         yield call([this.runningFlow, instruction]);
 
-        assetLoader.removeSplash();
-
         while (true) {
             instruction = this.getNextInstruction();
             yield call([this.runningFlow, instruction]);    

@@ -10,8 +10,6 @@ export type ReelSpinState = "STOPPED" | "STARTED" | "SPINNING" | "STOPPING";
  * Reel component
  */
 export class ReelComponent extends BaseComponent {
-    private cells: Cell[];
-
     public reelCells: ReelCellComponent[] = [];
 
     public config: ReelConfig;
@@ -22,10 +20,6 @@ export class ReelComponent extends BaseComponent {
 
     public outcomeCells: ReelCellComponent[] = [];
 
-    public topPaddingCell!: ReelCellComponent;
-
-    public bottomPaddingCell!: ReelCellComponent;
-
     public acceleration: number = 0;
 
     public currentSpeed: number = 0;
@@ -34,9 +28,8 @@ export class ReelComponent extends BaseComponent {
         super(layoutId);
 
         this.config = config;
-        this.cells = [...cells];
         this.setMask();
-        this.initReel();
+        this.initReel(cells);
         this.height = this.container.height;
     }
 
@@ -46,10 +39,10 @@ export class ReelComponent extends BaseComponent {
         this.container.mask = mask;
     }
 
-    private initReel() {
-        for(let i = 0; i < this.cells.length; i++) {
+    private initReel(cells: Cell[]) {
+        for(let i = 0; i < cells.length; i++) {
             const reelCell = this.makeReelCell();
-            reelCell.setSymbol(this.cells[i].symbol);
+            reelCell.setSymbol(cells[i].symbol);
             reelCell.container.position.set(0, i * reelCell.container.height);
             this.outcomeCells.push(reelCell);
         }

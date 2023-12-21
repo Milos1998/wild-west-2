@@ -3,7 +3,7 @@ import { ReelSetStateType } from "./ReelSetTypes";
 import { Image } from "../../../store/SlotTypes";
 
 const initialState: ReelSetStateType = {
-    perviousReelImage: [],
+    reelImage: [],
     isReadyToStop: true,
 }
 
@@ -11,8 +11,8 @@ const reelSetSlice = createSlice({
     name: "reelSetSlice",
     initialState,
     reducers: {
-        setInitialState: (state: ReelSetStateType, { payload: reelImage }: PayloadAction<Image>) => {
-            state.perviousReelImage = reelImage;
+        setReelImage: (state: ReelSetStateType, { payload: reelImage }: PayloadAction<Image>) => {
+            state.reelImage = reelImage;
         },
         setIsReadyToStop: (state: ReelSetStateType, { payload: isReadyToStop }: PayloadAction<boolean>) => {
             state.isReadyToStop = isReadyToStop;

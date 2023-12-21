@@ -42,13 +42,9 @@ export class NormalSpin {
 
     private setPaddingCells() {
         this.reelSet.reels.forEach((reel) => {
-            reel.topPaddingCell = reel.makeReelCell();
-            reel.topPaddingCell.setRandomSymbol();
-            reel.topPaddingCell.container.position.set(0, -reel.topPaddingCell.height);
-
-            reel.bottomPaddingCell = reel.makeReelCell();
-            reel.bottomPaddingCell.setRandomSymbol();
-            reel.bottomPaddingCell.container.position.set(0, reel.height);
+            const padding = reel.makeReelCell();
+            padding.setRandomSymbol();
+            padding.container.position.set(0, -padding.height);
         })
     }
 
@@ -85,7 +81,7 @@ export class NormalSpin {
 
             reel.currentSpeed += reel.acceleration * deltaMs;
 
-            this.moveReelCells(deltaMs, reel);
+            this.moveReelCells(deltaMs, i);
             if (reel.currentSpeed >= reel.config.speed) {
                 this.startedCount--;
                 this.spinningCount++;
@@ -98,7 +94,7 @@ export class NormalSpin {
         for (let i = 0; i < this.reelSet.reels.length; i++) {
             const reel = this.reelSet.reels[i];
             if (reel.spinState !== "SPINNING") continue;
-            this.moveReelCells(deltaMs, reel);
+            this.moveReelCells(deltaMs, i);
             if (this.spinDurationMs > reel.config.stopDelayMs && reelSetState().isReadyToStop) {
                 this.stoppingCount++;
                 this.spinningCount--;
@@ -118,7 +114,7 @@ export class NormalSpin {
 
             reel.currentSpeed += reel.acceleration * deltaMs;
 
-            this.moveReelCells(deltaMs, reel, true);
+            this.moveReelCells(deltaMs, i, true);
             if (reel.currentSpeed <= 0) {
                 this.stoppingCount--;
                 reel.spinState = "STOPPED";
@@ -129,7 +125,8 @@ export class NormalSpin {
         }
     }
 
-    private moveReelCells(deltaMs: number, reel: ReelComponent, isStopping: boolean = false) {
+    private moveReelCells(deltaMs: number, index: number, isStopping: boolean = false) {
+        const reel = this.reelSet.reels[index]
         const distance = reel.currentSpeed * deltaMs;
 
         for(let i = 0; i < reel.reelCells.length; i++) {
@@ -137,20 +134,21 @@ export class NormalSpin {
 
             reelCell.container.position.y += distance;
             if (reelCell.container.position.y > reel.height) {
-                this.replaceReelCell(reel, i, isStopping);
+                this.replaceReelCell(index, i, isStopping);
             }
         }
     }
 
-    private replaceReelCell(reel: ReelComponent, index: number, isStopping: boolean = false) {
-        reel.reelCells[index].clearCell();
-        reel.reelCells.splice(index, 1);
+    private replaceReelCell(index: number, rcIndex: number, isStopping: boolean = false) {
+        const reel = this.reelSet.reels[index];
+        reel.reelCells[rcIndex].clearCell();
+        reel.reelCells.splice(rcIndex, 1);
 
         let topCell = this.getTopMostReelCell(reel);
 
         const newReelCell = reel.makeReelCell();
         newReelCell.container.position.y = topCell.container.position.y - newReelCell.height;
-        this.setReelCellSymbol(newReelCell, isStopping);
+        this.setReelCellSymbol(index, newReelCell, isStopping);
         if (isStopping) reel.outcomeCells.push(newReelCell);
     }
 
@@ -164,10 +162,15 @@ export class NormalSpin {
         return topCell;
     }
 
-    private setReelCellSymbol(reelCell: ReelCellComponent, isStopping: boolean = false) {
+    private setReelCellSymbol(index: number, reelCell: ReelCellComponent, isStopping: boolean = false) {
         if (isStopping) {
-            //TODO from outcome
-            reelCell.setRandomSymbol();
+            const reel = this.reelSet.reels[index];
+            const reelImage = reelSetState().reelImage;
+            const cells = reelImage[index];
+            const outcomeCell = cells.find((cell) => cell.position.cell === cells.length - reel.outcomeCells.length - 1);
+
+            if (outcomeCell === undefined) throw new Error("Could not fing outcome cell");
+            reelCell.setSymbol(outcomeCell.symbol);
         } else {
             reelCell.setRandomSymbol();
         }

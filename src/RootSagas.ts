@@ -13,6 +13,8 @@ import { ReelSetControlls } from "./components/reelSet/ReelSetControlls";
 import { UiComponent } from "./components/ui/UiComponent";
 import { UiControlls } from "./components/ui/UiControlls";
 import { layoutUtils } from "./utils/LayoutUtils";
+import { reelSetActions } from "./components/reelSet/reelSetStore/ReelSetSlice";
+import { slotState } from "./store/Store";
 
 export type GameControlls = {
     reelSetControlls: ReelSetControlls,
@@ -28,6 +30,7 @@ export const rootSaga = function* (): Generator {
     sceneController.scene.addChild(layoutUtils.getLayoutItem("game").container);
 
     yield initSlotStore();
+    yield put(reelSetActions.setReelImage([...slotState().init.image]));
 
     const controlls = initComponents();
 

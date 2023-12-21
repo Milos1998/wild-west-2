@@ -1,7 +1,7 @@
 import { reelConfigs } from "../../config/ReelSetConfig";
 import { sceneController } from "../../controllers/SceneController";
 import { Cell } from "../../store/SlotTypes";
-import { slotState } from "../../store/Store";
+import { reelSetState, slotState } from "../../store/Store";
 import { BaseComponent } from "../BaseComponent";
 import { ReelComponent } from "./reel/ReelComponent";
 import { NormalSpin } from "./spinType/NormalSpin";
@@ -23,7 +23,7 @@ export class ReelSetComponent extends BaseComponent {
 
         symbolSetComponent.initSymbolPools();
 
-        const init = slotState().init.image;
+        const init = reelSetState().reelImage;
 
         for(let i = 0; i < init.length; i++) {
             this.initReel(i, init[i]);

@@ -14,47 +14,47 @@ export abstract class GeneralGameFlow {
     /**
      * Run before removing splash screen, sets up game elements etc.
      */
-    * onBeforeDisplay(): Generator<Generator<CallEffect<unknown>, void, unknown>, void, unknown> {}
+    * onBeforeDisplay(): Generator {}
 
     /**
      * Run after pervious flow's onChangeFlow. Here you setup current flow elements and display bonus win
      */
-    * onReturnToFlow(): Generator<Generator<CallEffect<unknown>, void, unknown>, void, unknown> {}
+    * onReturnToFlow(): Generator {}
 
     /**
      * Await for spin button/auto spin start
      */
-    * onBeforeRequest(): Generator<Generator<CallEffect<unknown>, void, unknown>, void, unknown> {}
+    * onBeforeRequest(): Generator {}
 
     /**
      * Here request is made and game is waiting for response
      */
-    * onMakeRequest(): Generator<Generator<CallEffect<unknown>, void, unknown>, void, unknown> {}
+    * onMakeRequest(): Generator {}
 
     /**
      * Here reels should stop and preshow can be played
      */
-    * onSuccessfulResponse(): Generator<Generator<CallEffect<unknown>, void, unknown>, void, unknown> {}
+    * onSuccessfulResponse(): Generator {}
 
     /**
      * Here win presentation should be played
      */
-    * onDisplayAward(): Generator<Generator<CallEffect<unknown>, void, unknown>, void, unknown> {}
+    * onDisplayAward(): Generator {}
 
     /**
      * setup this flow before exiting to another
      */
-    * onChangeFlow(): Generator<Generator<CallEffect<unknown>, void, unknown>, void, unknown> {}
+    * onChangeFlow(): Generator {}
 
     /**
      * Run when bad request has ben sent, request timeout or insuficient funds
      */
-    * onBadRequest(): Generator<Generator<CallEffect<unknown>, void, unknown>, void, unknown> {}
+    * onBadRequest(): Generator {}
 
     /**
      * Run when state machine error occurs
      */
-    * onError(): Generator<Generator<CallEffect<unknown>, void, unknown>, void, unknown> {
+    * onError(): Generator {
         alert("Something went wrong :/");
     }
 }
